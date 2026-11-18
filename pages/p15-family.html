@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>わたし の かぞく — にほんご かいわ1</title>
+  <link rel="stylesheet" href="../css/style.css?v=9">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../toc.html" class="brand-link">📚 もくじへ戻る</a>
+      <div class="top-nav-links">
+        <a href="p14-advice.html" class="nav-btn nav-prev">← 前へ</a>
+        <a href="p16-hobby.html" class="nav-btn primary nav-next">次へ →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="lesson-header">
+      <h1>わたし の かぞく</h1>
+      <p>My family（p.15）</p>
+    </div>
+
+    <section class="slide-sheet">
+<div class="slide-sheet-head">
+        <h2>なんにん かぞく ですか？（わたしのかぞく / My Family）</h2>
+        <p class="en-sub">わたしの 家族(かぞく)は、お父(とう)さん、お母(かあ)さん、お兄(にい)さん、わたし、弟(おとうと)、そして親戚(しんせき)、おじいさん、おばあさんの、たくさんの家族(かぞく)です。</p>
+      </div>
+      <div style="text-align: center;">
+        <div class="family-tree-wrap">
+          <img src="../assets/family-tree.jpg" alt="わたしのかぞく（My Family）">
+
+          <!-- Row 1: Grandparents -->
+          <button type="button" class="family-hotspot" style="left:17.5%; top:18%; width:12.5%; height:17%;" title="おじいさん" aria-label="おじいさん" onclick="playFamily('おじいさん', 'おじいさん（Grandfather）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:31%; top:18%; width:12.5%; height:17%;" title="おばあさん" aria-label="おばあさん" onclick="playFamily('おばあさん', 'おばあさん（Grandmother）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:58.5%; top:18%; width:12.5%; height:17%;" title="お母さん方のおじいさん" aria-label="お母さん方のおじいさん" onclick="playFamily('おかあさんかたのおじいさん', 'お母さん方のおじいさん（Maternal Grandfather）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:72%; top:18%; width:12.5%; height:17%;" title="お母さん方のおばあさん" aria-label="お母さん方のおばあさん" onclick="playFamily('おかあさんかたのおばあさん', 'お母さん方のおばあさん（Maternal Grandmother）', this)"></button>
+
+          <!-- Row 2: Parents & Relatives -->
+          <button type="button" class="family-hotspot" style="left:10.5%; top:43.5%; width:12.5%; height:17%;" title="お父さんの姉" aria-label="お父さんの姉" onclick="playFamily('おとうさんのあね', 'お父さんの姉（Aunt）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:24%; top:43.5%; width:12.5%; height:17%;" title="お父さん" aria-label="お父さん" onclick="playFamily('おとうさん', 'お父さん（Father）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:37.5%; top:43.5%; width:12.5%; height:17%;" title="お母さん" aria-label="お母さん" onclick="playFamily('おかあさん', 'お母さん（Mother）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:51%; top:43.5%; width:12.5%; height:17%;" title="お母さんの妹" aria-label="お母さんの妹" onclick="playFamily('おかあさんのいもうと', 'お母さんの妹（Aunt）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:64.5%; top:43.5%; width:12.5%; height:17%;" title="お母さんの弟" aria-label="お母さんの弟" onclick="playFamily('おかあさんのおとうと', 'お母さんの弟（Uncle）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:78%; top:43.5%; width:12.5%; height:17%;" title="叔父の奥さん" aria-label="叔父の奥さん" onclick="playFamily('おじのおくさん', '叔父の奥さん（Aunt）', this)"></button>
+
+          <!-- Row 3: Siblings & Cousins -->
+          <button type="button" class="family-hotspot" style="left:8%; top:68.5%; width:12%; height:16.5%;" title="お兄さん" aria-label="お兄さん" onclick="playFamily('おにいさん', 'お兄さん（Older brother）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:19%; top:68.5%; width:12%; height:16.5%;" title="お姉さん" aria-label="お姉さん" onclick="playFamily('おねえさん', 'お姉さん（Older sister）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:30.5%; top:68.5%; width:12%; height:16.5%;" title="わたし" aria-label="わたし" onclick="playFamily('わたし', 'わたし（Me）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:42.5%; top:68.5%; width:12%; height:16.5%;" title="弟" aria-label="弟" onclick="playFamily('おとうと', '弟（Younger brother）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:54.5%; top:68.5%; width:12%; height:16.5%;" title="妹" aria-label="妹" onclick="playFamily('いもうと', '妹（Younger sister）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:66.5%; top:68.5%; width:12%; height:16.5%;" title="いとこ" aria-label="いとこ" onclick="playFamily('いとこ', 'いとこ（Girl cousin）', this)"></button>
+          <button type="button" class="family-hotspot" style="left:78.5%; top:68.5%; width:12%; height:16.5%;" title="いとこ" aria-label="いとこ" onclick="playFamily('いとこ', 'いとこ（Baby boy cousin）', this)"></button>
+        </div>
+      </div>
+
+      <script>
+        function playFamily(speech, label, btn) {
+          speakText(speech, btn);
+        }
+      </script>
+      <div class="pair-grid" style="margin-top:16px;">
+        <div class="jp-card">
+          <p>日本(にほん)の【家族(かぞく)】は、いっしょに すんでいる 人(ひと)のことを いいます。<br>あなたの 国(くに)の【family】と ちがうことが あります。<br>「かぞくは 〇人です。」<br>「日本(にほん)で いっしょに すんでいるのは 〇人です。」</p>
+          <div class="card-speak-row"><button class="speak-mini-btn" type="button" onclick="speakText('かぞくは、まるにんです。にほんでいっしょにすんでいるのは、まるにんです。', this)">🔊 聞く</button></div>
+        </div>
+        <div class="en-card">
+          <p>In Japanese, "kazoku" usually means the people who live together with you. This can be different from "family" in your country.<br>You can say: "My family has 〇 people."<br>"The people who live with me in Japan are 〇."</p>
+        </div>
+      </div>
+      <div class="slide-page-num">15</div>
+    </section>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="p14-advice.html" class="nav-btn nav-prev">← 前のページ</a>
+      <a href="../toc.html" class="nav-btn">📚 もくじへ戻る</a>
+      <a href="p16-hobby.html" class="nav-btn primary nav-next">次のページ →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
+  <script src="../js/app.js?v=2"></script>
+</body>
+</html>

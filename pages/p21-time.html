@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>いまのじかん — にほんご かいわ1</title>
+  <link rel="stylesheet" href="../css/style.css?v=9">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../toc.html" class="brand-link">📚 もくじへ戻る</a>
+      <div class="top-nav-links">
+        <a href="p20-date.html" class="nav-btn nav-prev">← 前へ</a>
+        <a href="p22-trash-1.html" class="nav-btn primary nav-next">次へ →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="lesson-header">
+      <h1>いまのじかん</h1>
+      <p>What time is it?（p.21）</p>
+    </div>
+
+    <section class="slide-sheet">
+      <div class="slide-sheet-head">
+        <h2>いまのじかん</h2>
+        <p class="en-sub">いま ____ じ ____ ぷん(ふん) です ／ 午前(ごぜん) A.M. / 午後(ごご) P.M.（時計の絵を押すと音声が流れます🔊）</p>
+      </div>
+
+      <div class="section-block">
+        <div class="section-heading"><h3>じかんの よみかた（れい）</h3></div>
+        <div id="clock-grid" class="clock-grid"></div>
+      </div>
+
+      <div class="section-block">
+        <div class="section-heading"><h3>面接(めんせつ)・会話(かいわ)で よく使(つか)う ことば</h3></div>
+        <table class="info-table">
+          <thead><tr><th>日本語</th><th>つかいかた（れい）</th><th>音声</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>いま なんじですか？</td>
+              <td>いま なんじですか？ 10じ 30ふんです。</td>
+              <td><button class="speak-mini-btn" type="button" onclick="speakText('いま、なんじですか？じゅうじさんじゅっぷんです。', this)">🔊</button></td>
+            </tr>
+            <tr>
+              <td>〜じに あいます</td>
+              <td>2じに あいます。（14じに あいます。）</td>
+              <td><button class="speak-mini-btn" type="button" onclick="speakText('にじにあいます。', this)">🔊</button></td>
+            </tr>
+            <tr>
+              <td>〜じから はじめます</td>
+              <td>10じから はじめます。（22じから はじめます。）</td>
+              <td><button class="speak-mini-btn" type="button" onclick="speakText('じゅうじからはじめます。', this)">🔊</button></td>
+            </tr>
+            <tr>
+              <td>〜じまで です</td>
+              <td>5じまで です。（17じまで です。）</td>
+              <td><button class="speak-mini-btn" type="button" onclick="speakText('ごじまでです。', this)">🔊</button></td>
+            </tr>
+            <tr>
+              <td>〜じに おわります</td>
+              <td>3じに おわります。（15じに おわります。）</td>
+              <td><button class="speak-mini-btn" type="button" onclick="speakText('さんじにおわります。', this)">🔊</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="dialogue-group">
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag">Aさん</span>きょうしつは なんじに はじまりますか？／なんじスタートですか？</p>
+            <p class="en-line">Person A: What time does the class start? / What time does it begin?</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('きょうしつは、なんじにはじまりますか？', this)">🔊 聞く</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag b">Bさん</span>____ じに はじまります。</p>
+            <p class="en-line">Person B: It starts at (time).</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide-page-num">21</div>
+    </section>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="p20-date.html" class="nav-btn nav-prev">← 前のページ</a>
+      <a href="../toc.html" class="nav-btn">📚 もくじへ戻る</a>
+      <a href="p22-trash-1.html" class="nav-btn primary nav-next">次のページ →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
+  <script src="../js/app.js?v=2"></script>
+  <script>
+    const CLOCKS = [
+      { h: 10, m: 30, label: '10:30', read: 'じゅうじ さんじゅっぷん', en: 'ten thirty' },
+      { h: 1,  m: 0,  label: '1:00',  read: 'いちじ',                 en: "one o'clock" },
+      { h: 3,  m: 15, label: '3:15',  read: 'さんじ じゅうごふん',     en: 'three fifteen' },
+      { h: 6,  m: 45, label: '6:45',  read: 'ろくじ よんじゅうごふん', en: 'six forty-five' },
+      { h: 9,  m: 30, label: '9:30',  read: 'くじ さんじゅっぷん',     en: 'nine thirty' }
+    ];
+
+    function buildClockSVG(h, m) {
+      const hourAngle = ((h % 12) + m / 60) * 30;
+      const minAngle = m * 6;
+      let ticks = '';
+      for (let i = 1; i <= 12; i++) {
+        const rad = (i * 30 - 90) * Math.PI / 180;
+        const x = 50 + Math.cos(rad) * 34;
+        const y = 50 + Math.sin(rad) * 34 + 3;
+        ticks += `<text x="${x.toFixed(1)}" y="${y.toFixed(1)}" text-anchor="middle" font-size="8.5" font-weight="700" fill="#4B3F72">${i}</text>`;
+      }
+      return `
+        <svg class="clock-svg" viewBox="0 0 100 100" aria-hidden="true">
+          <circle cx="50" cy="50" r="45" fill="#FFFFFF" stroke="#4B3F72" stroke-width="3.5"/>
+          <circle cx="50" cy="50" r="41" fill="none" stroke="#EDE9FE" stroke-width="1.5"/>
+          ${ticks}
+          <line x1="50" y1="50" x2="50" y2="27" stroke="#22223B" stroke-width="3.6" stroke-linecap="round" transform="rotate(${hourAngle} 50 50)"/>
+          <line x1="50" y1="50" x2="50" y2="17" stroke="#6C5CE7" stroke-width="2.5" stroke-linecap="round" transform="rotate(${minAngle} 50 50)"/>
+          <circle cx="50" cy="50" r="3.5" fill="#4B3F72"/>
+        </svg>
+      `;
+    }
+
+    const grid = document.getElementById('clock-grid');
+    CLOCKS.forEach((c) => {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'clock-card';
+      btn.innerHTML = `
+        ${buildClockSVG(c.h, c.m)}
+        <span class="clock-time">${c.label} 🔊</span>
+        <span class="clock-read">${c.read}</span>
+        <span class="clock-en">${c.en}</span>
+      `;
+      btn.onclick = () => speakText(c.read, btn);
+      grid.appendChild(btn);
+    });
+  </script>
+</body>
+</html>

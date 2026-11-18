@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>はじめまして（じこしょうかい） — にほんご かいわ1</title>
+  <link rel="stylesheet" href="../css/style.css?v=9">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../toc.html" class="brand-link">📚 もくじへ戻る</a>
+      <div class="top-nav-links">
+        <a href="#" class="nav-btn nav-prev disabled">← 前へ</a>
+        <a href="02-greetings-p3.html" class="nav-btn primary nav-next">次へ →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="lesson-header">
+      <h1>はじめまして（じこしょうかい）</h1>
+      <p>Nice to meet you (Self-introduction)（p.2）</p>
+    </div>
+
+    <section class="slide-sheet">
+      <div class="slide-sheet-head">
+        <h2>はじめまして（じこしょうかい、かぞく、しゅみ）</h2>
+        <p class="en-sub">Nice to meet you (Self-introduction, family, hobbies)<br>I am [Name].</p>
+      </div>
+
+      <!-- 会話 1 -->
+      <div class="dialogue-group">
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag">Aさん</span>こんにちは。（こんばんは。）</p>
+            <p class="en-line">Person A: Hello. (Good evening.)</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('こんにちは。こんばんは。', this)">🔊 聞く</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag b">Bさん</span>わたし（なまえ）は 〇〇です。</p>
+            <p class="en-line">Person B: I am [Name].</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('わたしは、まるまるです。', this)">🔊 聞く</button>
+        </div>
+      </div>
+
+      <!-- 会話 2 -->
+      <div class="dialogue-group">
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag">Aさん</span>あなたの 国(くに)は どこですか？</p>
+            <p class="en-line">Person A: Which country are you from?</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('あなたのくには、どこですか？', this)">🔊 聞く</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag b">Bさん</span>わたしは 国(くに)からきました。</p>
+            <p class="jp-note">※Bさん：わたしのくには（くに）です。</p>
+            <p class="en-line">Person B: I'm from [Country Name]</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('わたしは、くにからきました。わたしのくには、くにです。', this)">🔊 聞く</button>
+        </div>
+      </div>
+
+      <!-- 会話 3 -->
+      <div class="dialogue-group">
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag">Aさん</span>いつ日本(にほん)に きましたか？</p>
+            <p class="en-line">Person A: When did you come (to Japan)?</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('いつにほんにきましたか？', this)">🔊 聞く</button>
+        </div>
+        <div class="dialogue-line">
+          <div class="dialogue-content">
+            <p class="jp-line"><span class="speaker-tag b">Bさん</span>わたしは 年(ねん) 月(がつ)に きました</p>
+            <p class="en-line">Person B: I came to Japan in [Month], [Year].</p>
+          </div>
+          <button class="speak-mini-btn" type="button" onclick="speakText('わたしは、ねん、がつにきました。', this)">🔊 聞く</button>
+        </div>
+      </div>
+
+      <!-- まとめ -->
+      <div class="summary-box">
+        <span class="summary-badge">まとめ</span>
+        <p class="fill-sentence">
+          わたしは <input id="summary-name" type="text" class="blank-input" placeholder="なまえ" aria-label="なまえ"> です
+        </p>
+        <p class="fill-sentence">
+          <input id="summary-country" type="text" class="blank-input" placeholder="国（Country）" aria-label="国"> の
+          <input id="summary-city" type="text" class="blank-input" placeholder="まち（City）" aria-label="まち"> から、
+          <input id="summary-year" type="text" class="blank-input short" placeholder="年" aria-label="年"> 年の
+          <input id="summary-month" type="text" class="blank-input short" placeholder="月" aria-label="月"> 月に きました
+        </p>
+
+        <div class="slide-closing">
+          <div class="dialogue-line">
+            <div class="dialogue-content">
+              <p class="jp-line">よろしく おねがいします</p>
+              <p class="en-line">
+                I am [Name].<br>
+                I came (to Japan) from [City], [Country] in [Month/Year].<br>
+                thank you.
+              </p>
+            </div>
+            <button class="speak-mini-btn" type="button" onclick="speakText('よろしくおねがいします。', this)">🔊 聞く</button>
+          </div>
+        </div>
+
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakSummary(this)">🔊 まとめを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
+      <div class="slide-page-num">2</div>
+    </section>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="#" class="nav-btn nav-prev disabled">← 前のページ</a>
+      <a href="../toc.html" class="nav-btn">📚 もくじへ戻る</a>
+      <a href="02-greetings-p3.html" class="nav-btn primary nav-next">次のページ →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
+  <script src="../js/app.js?v=2"></script>
+</body>
+</html>

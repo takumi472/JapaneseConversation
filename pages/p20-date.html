@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>きょうは なんにち？ なんようび？ — にほんご かいわ1</title>
+  <link rel="stylesheet" href="../css/style.css?v=9">
+</head>
+<body>
+  <header class="top-bar">
+    <div class="top-bar-inner">
+      <a href="../toc.html" class="brand-link">📚 もくじへ戻る</a>
+      <div class="top-nav-links">
+        <a href="p19-money.html" class="nav-btn nav-prev">← 前へ</a>
+        <a href="p21-time.html" class="nav-btn primary nav-next">次へ →</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="lesson-header">
+      <h1>きょうは なんにち？ なんようび？</h1>
+      <p>What is the date today? What day is it today?（p.20）</p>
+    </div>
+
+    <section class="slide-sheet">
+      <div class="slide-sheet-head">
+        <h2>きょうは なんにち？ なんようび？</h2>
+        <p class="en-sub">
+          きょうは ____ 月(がつ) ____ 日(にち) ____ ようび です<br>
+          Today is (month) (date), (day of the week).（カレンダーの日付・曜日・月を押すと音声が出ます🔊）
+        </p>
+      </div>
+
+      <div class="calendar-layout">
+        <!-- Left: Real Interactive Calendar -->
+        <div class="calendar-card">
+          <div id="cal-banner" class="calendar-banner">🌸 January　1月（いちがつ） 🌸</div>
+          <div class="calendar-grid" id="cal-weekdays">
+            <button type="button" class="cal-head-btn sun" onclick="speakText('にちようび', this)">
+              <span class="ja">日曜日</span><span class="furi">(にちようび)</span><span class="en">Sunday</span>
+            </button>
+            <button type="button" class="cal-head-btn" onclick="speakText('げつようび', this)">
+              <span class="ja">月曜日</span><span class="furi">(げつようび)</span><span class="en">Monday</span>
+            </button>
+            <button type="button" class="cal-head-btn" onclick="speakText('かようび', this)">
+              <span class="ja">火曜日</span><span class="furi">(かようび)</span><span class="en">Tuesday</span>
+            </button>
+            <button type="button" class="cal-head-btn" onclick="speakText('すいようび', this)">
+              <span class="ja">水曜日</span><span class="furi">(すいようび)</span><span class="en">Wednesday</span>
+            </button>
+            <button type="button" class="cal-head-btn" onclick="speakText('もくようび', this)">
+              <span class="ja">木曜日</span><span class="furi">(もくようび)</span><span class="en">Thursday</span>
+            </button>
+            <button type="button" class="cal-head-btn" onclick="speakText('きんようび', this)">
+              <span class="ja">金曜日</span><span class="furi">(きんようび)</span><span class="en">Friday</span>
+            </button>
+            <button type="button" class="cal-head-btn sat" onclick="speakText('どようび', this)">
+              <span class="ja">土曜日</span><span class="furi">(どようび)</span><span class="en">Saturday</span>
+            </button>
+          </div>
+          <div class="calendar-grid" id="cal-days" style="margin-top: 6px;"></div>
+        </div>
+
+        <!-- Right: Months Sidebar -->
+        <div class="cal-months-card" id="cal-months">
+          <p class="cal-months-title">月(つき) / Months</p>
+        </div>
+      </div>
+
+      <div class="slide-page-num">20</div>
+    </section>
+
+    <nav class="page-nav" aria-label="ページ移動">
+      <a href="p19-money.html" class="nav-btn nav-prev">← 前のページ</a>
+      <a href="../toc.html" class="nav-btn">📚 もくじへ戻る</a>
+      <a href="p21-time.html" class="nav-btn primary nav-next">次のページ →</a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
+  <script src="../js/app.js?v=2"></script>
+  <script>
+    const DAY_READINGS = {
+      1: 'ついたち', 2: 'ふつか', 3: 'みっか', 4: 'よっか', 5: 'いつか',
+      6: 'むいか', 7: 'なのか', 8: 'ようか', 9: 'ここのか', 10: 'とおか',
+      11: 'じゅういちにち', 12: 'じゅうににち', 13: 'じゅうさんにち', 14: 'じゅうよっか', 15: 'じゅうごにち',
+      16: 'じゅうろくにち', 17: 'じゅうしちにち', 18: 'じゅうはちにち', 19: 'じゅうくにち', 20: 'はつか',
+      21: 'にじゅういちにち', 22: 'にじゅうににち', 23: 'にじゅうさんにち', 24: 'にじゅうよっか', 25: 'にじゅうごにち',
+      26: 'にじゅうろくにち', 27: 'にじゅうしちにち', 28: 'にじゅうはちにち', 29: 'にじゅうくにち', 30: 'さんじゅうにち',
+      31: 'さんじゅういちにち'
+    };
+
+    const MONTHS = [
+      { num: 1, en: 'January', read: 'いちがつ', icon: '🌸' },
+      { num: 2, en: 'February', read: 'にがつ', icon: '❄️' },
+      { num: 3, en: 'March', read: 'さんがつ', icon: '🌷' },
+      { num: 4, en: 'April', read: 'しがつ', icon: '🌸' },
+      { num: 5, en: 'May', read: 'ごがつ', icon: '🌿' },
+      { num: 6, en: 'June', read: 'ろくがつ', icon: '☔' },
+      { num: 7, en: 'July', read: 'しちがつ', icon: '🌻' },
+      { num: 8, en: 'August', read: 'はちがつ', icon: '🌊' },
+      { num: 9, en: 'September', read: 'くがつ', icon: '🎑' },
+      { num: 10, en: 'October', read: 'じゅうがつ', icon: '🍁' },
+      { num: 11, en: 'November', read: 'じゅういちがつ', icon: '🍂' },
+      { num: 12, en: 'December', read: 'じゅうにがつ', icon: '🎄' }
+    ];
+
+    let activeMonth = 1;
+
+    function renderMonths() {
+      const container = document.getElementById('cal-months');
+      MONTHS.forEach((m) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cal-month-btn' + (m.num === activeMonth ? ' active' : '');
+        btn.innerHTML = `<span class="m-ja">${m.num}月(${m.read})</span><span class="m-en">${m.en}</span>`;
+        btn.onclick = () => {
+          activeMonth = m.num;
+          document.querySelectorAll('.cal-month-btn').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          renderCalendar(m.num);
+          speakText(m.read, btn);
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function renderCalendar(monthNum) {
+      const m = MONTHS.find((x) => x.num === monthNum) || MONTHS[0];
+      const banner = document.getElementById('cal-banner');
+      banner.textContent = `${m.icon} ${m.en}　${m.num}月（${m.read}） ${m.icon}`;
+
+      const grid = document.getElementById('cal-days');
+      grid.innerHTML = '';
+
+      const year = 2026;
+      const firstDay = new Date(year, monthNum - 1, 1).getDay(); // 0=Sun..6=Sat
+      const daysInMonth = new Date(year, monthNum, 0).getDate();
+
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement('div');
+        empty.className = 'cal-empty';
+        grid.appendChild(empty);
+      }
+
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dow = (firstDay + d - 1) % 7;
+        const reading = DAY_READINGS[d];
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cal-day-btn' + (dow === 0 ? ' sun' : dow === 6 ? ' sat' : '');
+        btn.innerHTML = `<span class="num">${d}日</span><span class="read">${reading}</span>`;
+        btn.onclick = () => speakText(reading, btn);
+        grid.appendChild(btn);
+      }
+    }
+
+    renderMonths();
+    renderCalendar(1);
+  </script>
+</body>
+</html>
