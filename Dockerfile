@@ -4,6 +4,7 @@ FROM nginx:1.27-alpine
 ENV PORT=8080
 
 # nginx:alpine automatically runs envsubst on /etc/nginx/templates/*.template
+RUN rm -f /etc/nginx/conf.d/default.conf
 COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 
 # Explicitly copy only public static site files (allowlist)

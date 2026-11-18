@@ -1,6 +1,6 @@
 substitutions:
   _REGION: asia-northeast1
-  _AR_REPO: cloud-run-source-deploy
+  _AR_REPO: my-app-repo
   _SERVICE_NAME: takesato-japanese-conversation
 
 steps:
