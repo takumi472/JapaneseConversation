@@ -1,8 +1,11 @@
-.git
-.gitignore
-.DS_Store
-Dockerfile
-.dockerignore
-cloudbuild.yaml
-nginx.conf.template
-*.md
+# Default deny: exclude everything to prevent accidental secret/log/cache leakage
+*
+
+# Allow only required files for the Nginx image build
+!index.html
+!toc.html
+!css/
+!js/
+!assets/
+!pages/
+!nginx.conf.template

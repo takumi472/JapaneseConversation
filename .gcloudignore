@@ -1,0 +1,14 @@
+# Default deny: prevent uploading secrets, logs, .git, or node_modules to Cloud Build
+*
+
+# Allow only files needed by Cloud Build and Docker
+!Dockerfile
+!.dockerignore
+!cloudbuild.yaml
+!nginx.conf.template
+!index.html
+!toc.html
+!css/
+!js/
+!assets/
+!pages/
