@@ -4,7 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>日本(にほん) の お金(かね) — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .money-check-badge {
+      display: inline-block;
+      margin-left: 8px;
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+    .money-check-badge.ok {
+      color: #15803D;
+    }
+    .money-check-badge.ng {
+      color: #DC2626;
+    }
+    .coin-memo-grid {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px 12px;
+      margin-top: 6px;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+    .coin-memo-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.75);
+      border: 1px solid #FDE68A;
+      border-radius: 8px;
+      padding: 4px 8px;
+    }
+    .coin-memo-item input {
+      width: 48px;
+      margin: 0 2px;
+    }
+    .coin-total-pill {
+      display: inline-block;
+      background: #FEF3C7;
+      color: #92400E;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-weight: 800;
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -62,6 +106,45 @@
         <p class="jp-line">10円 ＝ 5円×2枚 ＝ 5円×1枚 ＋ 1円×5枚 ＝ 1円×10枚</p>
         <p class="en-line">10 yen = 5 yen × 2 coins = 5 yen × 1 coin + 1 yen × 5 coins = 1 yen × 10 coins</p>
       </div>
+      <!-- お金の計算 れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">お金の計算(けいさん) れんしゅうメモ</span>
+
+        <p class="fill-sentence">
+          ① おつり：
+          <input id="p19-pay" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="1000" aria-label="はらうおかね"> 円 －
+          <input id="p19-price" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="680" aria-label="ねだん"> 円 ＝
+          <input id="p19-change" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="こたえ" aria-label="おつりのこたえ"> 円
+          <span id="p19-change-result" class="money-check-badge"></span>
+        </p>
+
+        <p class="fill-sentence">
+          ② ごうけい：
+          <input id="p19-a" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="250" aria-label="ねだん1"> 円 ＋
+          <input id="p19-b" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="350" aria-label="ねだん2"> 円 ＝
+          <input id="p19-sum" type="text" inputmode="numeric" class="blank-input short" style="width: 90px;" placeholder="こたえ" aria-label="ごうけいのこたえ"> 円
+          <span id="p19-sum-result" class="money-check-badge"></span>
+        </p>
+
+        <div style="margin-top: 10px;">
+          <p class="fill-sentence" style="margin-bottom: 4px;">③ おさつ・コインの まいすう：</p>
+          <div class="coin-memo-grid">
+            <label class="coin-memo-item">1,000円×<input id="p19-c1000" type="number" min="0" class="blank-input short" value="0" oninput="updateCoinTotal()">枚</label>
+            <label class="coin-memo-item">500円×<input id="p19-c500" type="number" min="0" class="blank-input short" value="0" oninput="updateCoinTotal()">枚</label>
+            <label class="coin-memo-item">100円×<input id="p19-c100" type="number" min="0" class="blank-input short" value="0" oninput="updateCoinTotal()">枚</label>
+            <label class="coin-memo-item">50円×<input id="p19-c50" type="number" min="0" class="blank-input short" value="0" oninput="updateCoinTotal()">枚</label>
+            <label class="coin-memo-item">10円×<input id="p19-c10" type="number" min="0" class="blank-input short" value="0" oninput="updateCoinTotal()">枚</label>
+            <span class="coin-total-pill">ごうけい：<span id="p19-coin-total">0</span> 円</span>
+          </div>
+        </div>
+
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="checkMoneyPractice()">✅ こたえ合わせ</button>
+          <button class="nav-btn" type="button" onclick="speakMoneyPractice(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">19</div>
     </section>
 
@@ -73,6 +156,97 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function parseYen(id) {
+      const raw = (document.getElementById(id)?.value || '').trim();
+      if (!raw) return null;
+      const half = raw.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/[,円えん\s]/g, '');
+      if (!/^-?\d+$/.test(half)) return null;
+      return Number(half);
+    }
+
+    function updateCoinTotal() {
+      const total =
+        (Number(document.getElementById('p19-c1000')?.value) || 0) * 1000 +
+        (Number(document.getElementById('p19-c500')?.value) || 0) * 500 +
+        (Number(document.getElementById('p19-c100')?.value) || 0) * 100 +
+        (Number(document.getElementById('p19-c50')?.value) || 0) * 50 +
+        (Number(document.getElementById('p19-c10')?.value) || 0) * 10;
+      const el = document.getElementById('p19-coin-total');
+      if (el) el.textContent = total.toLocaleString('ja-JP');
+      return total;
+    }
+
+    function checkMoneyPractice() {
+      const pay = parseYen('p19-pay');
+      const price = parseYen('p19-price');
+      const changeAns = parseYen('p19-change');
+      const changeEl = document.getElementById('p19-change-result');
+      if (pay !== null && price !== null) {
+        const expected = pay - price;
+        if (changeAns === null) {
+          document.getElementById('p19-change').value = String(expected);
+          changeEl.textContent = `こたえ：${expected.toLocaleString('ja-JP')}円`;
+          changeEl.className = 'money-check-badge ok';
+        } else if (changeAns === expected) {
+          changeEl.textContent = '⭕ せいかい！';
+          changeEl.className = 'money-check-badge ok';
+        } else {
+          changeEl.textContent = `❌ こたえは ${expected.toLocaleString('ja-JP')}円`;
+          changeEl.className = 'money-check-badge ng';
+        }
+      } else {
+        changeEl.textContent = '';
+      }
+
+      const a = parseYen('p19-a');
+      const b = parseYen('p19-b');
+      const sumAns = parseYen('p19-sum');
+      const sumEl = document.getElementById('p19-sum-result');
+      if (a !== null && b !== null) {
+        const expected = a + b;
+        if (sumAns === null) {
+          document.getElementById('p19-sum').value = String(expected);
+          sumEl.textContent = `こたえ：${expected.toLocaleString('ja-JP')}円`;
+          sumEl.className = 'money-check-badge ok';
+        } else if (sumAns === expected) {
+          sumEl.textContent = '⭕ せいかい！';
+          sumEl.className = 'money-check-badge ok';
+        } else {
+          sumEl.textContent = `❌ こたえは ${expected.toLocaleString('ja-JP')}円`;
+          sumEl.className = 'money-check-badge ng';
+        }
+      } else {
+        sumEl.textContent = '';
+      }
+
+      updateCoinTotal();
+    }
+
+    function speakMoneyPractice(btnEl) {
+      const parts = [];
+      const pay = parseYen('p19-pay');
+      const price = parseYen('p19-price');
+      if (pay !== null && price !== null) {
+        const diff = pay - price;
+        parts.push(`${pay}えんから、${price}えんをひくと、おつりは${diff}えんです。`);
+      }
+      const a = parseYen('p19-a');
+      const b = parseYen('p19-b');
+      if (a !== null && b !== null) {
+        const sum = a + b;
+        parts.push(`${a}えんと、${b}えんで、ごうけい${sum}えんです。`);
+      }
+      const coinTotal = updateCoinTotal();
+      if (coinTotal > 0) {
+        parts.push(`おかねのごうけいは、${coinTotal}えんです。`);
+      }
+      if (parts.length === 0) {
+        parts.push('せんえんから、ろっぴゃくはちじゅうえんをひくと、おつりはさんびゃくにじゅうえんです。');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>あたまがいたいんです（びょういん①：内科） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -80,6 +80,24 @@
           <button type="button" class="family-hotspot" style="left:73%; top:76.5%; width:17%; height:14%;" title="びょういん" aria-label="びょういん" onclick="speakText('びょういん', this)"></button>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（ないか）</span>
+        <p class="fill-sentence">
+          ① <input id="p25-pain" type="text" class="blank-input" style="width: 170px;" placeholder="例: あたま・おなか" aria-label="いたいところ"> が いたいです。
+        </p>
+        <p class="fill-sentence">
+          ② <input id="p25-symptom" type="text" class="blank-input" style="width: 210px;" placeholder="例: ねつがあります・せき" aria-label="しょうじょう"> です。
+        </p>
+        <p class="fill-sentence">
+          ③ <input id="p25-days" type="text" inputmode="numeric" class="blank-input short" placeholder="例: 3" aria-label="なんにちまえから"> 日前(にちまえ) からです。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP25(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">25</div>
     </section>
 
@@ -91,6 +109,32 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    const DAYS_AGO_READINGS = {
+      1: 'いちにちまえ', 2: 'ふつかまえ', 3: 'みっかまえ', 4: 'よっかまえ', 5: 'いつかまえ',
+      6: 'むいかまえ', 7: 'なのかまえ', 8: 'ようかまえ', 9: 'ここのかまえ', 10: 'とおかまえ'
+    };
+
+    function speakPracticeP25(btnEl) {
+      const pain = (document.getElementById('p25-pain')?.value || '').trim();
+      const symptom = (document.getElementById('p25-symptom')?.value || '').trim();
+      const daysRaw = (document.getElementById('p25-days')?.value || '').trim();
+
+      const parts = [];
+      if (pain) parts.push(`${pain}がいたいです。`);
+      if (symptom) parts.push(`${symptom}です。`);
+      if (daysRaw) {
+        const half = daysRaw.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/[^\d]/g, '');
+        const n = half ? Number(half) : null;
+        const daysRead = (n && DAYS_AGO_READINGS[n]) ? DAYS_AGO_READINGS[n] : `${daysRaw}にちまえ`;
+        parts.push(`${daysRead}からです。`);
+      }
+      if (parts.length === 0) {
+        parts.push('あたまがいたいです。みっかまえからです。');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

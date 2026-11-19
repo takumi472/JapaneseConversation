@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>いろんな あいさつ（p.4） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -90,6 +90,21 @@
         </div>
       </div>
 
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ</span>
+        <p class="fill-sentence">
+          ① すみません。<input id="p4-req-1" type="text" class="blank-input" style="width: 200px;" placeholder="〇〇（例: てつだって）" aria-label="たのむこと1"> してください。
+        </p>
+        <p class="fill-sentence">
+          ② <input id="p4-req-2" type="text" class="blank-input" style="width: 200px;" placeholder="〇〇（例: これ）" aria-label="たのむこと2"> できますか？
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP4(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">4</div>
     </section>
 
@@ -101,6 +116,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

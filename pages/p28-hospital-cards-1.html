@@ -4,7 +4,44 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>病院(びょういん)で ひつような カード（①〜③） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .card-illust-layout {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .card-illust-wrap {
+      flex: 0 0 220px;
+      text-align: center;
+    }
+    .card-illust-img {
+      width: 100%;
+      max-width: 220px;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 5px 14px rgba(15, 23, 42, 0.14);
+      display: block;
+      margin: 0 auto;
+    }
+    .card-illust-layout .pair-grid {
+      flex: 1;
+      min-width: 0;
+    }
+    @media (max-width: 780px) {
+      .card-illust-layout {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .card-illust-wrap {
+        flex: none;
+      }
+      .card-illust-img {
+        max-width: 260px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -30,31 +67,73 @@
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>① 在留(ざいりゅう)カード</h3><span class="en-title">① Residence Card</span></div>
-        <div class="pair-grid">
-          <div class="jp-card">
-            <p>外国人(がいこくじん)の みぶんしょう<br>・なまえ ・住所(じゅうしょ) ・在留資格(ざいりゅうしかく)が かいてあります。<br>びょういんで、かならず みせます。</p>
+        <div class="card-illust-layout">
+          <div class="card-illust-wrap">
+            <img src="../assets/card-residence.svg" alt="在留カードの見本イラスト" class="card-illust-img">
           </div>
-          <div class="en-card"><p>This is the ID card for foreign residents in Japan. It shows your name, address, and residence status. You must show this card at the hospital.</p></div>
+          <div class="pair-grid">
+            <div class="jp-card">
+              <p>外国人(がいこくじん)の みぶんしょう<br>・なまえ ・住所(じゅうしょ) ・在留資格(ざいりゅうしかく)が かいてあります。<br>びょういんで、かならず みせます。</p>
+            </div>
+            <div class="en-card"><p>This is the ID card for foreign residents in Japan. It shows your name, address, and residence status. You must show this card at the hospital.</p></div>
+          </div>
         </div>
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>② 健康保険証(けんこうほけんしょう)</h3><span class="en-title">② Health Insurance Card</span></div>
-        <div class="pair-grid">
-          <div class="jp-card">
-            <p>びょういんの おかねが <span class="alert-red">3わり(30%)</span> に なります（70%は 日本 が はらいます）。<br>ほけんしょうがない と、10わり(100% ぜんぶ) はらいます。<br>・住民票(じゅうみんひょう)の てつづきがおわると、国民健康保険(こくみんけんこうほけん)に はいれます。<br>・会社(かいしゃ)で はたらくひとは、社会保険(しゃかいほけん)に はいれます。</p>
+        <div class="card-illust-layout">
+          <div class="card-illust-wrap">
+            <img src="../assets/card-insurance.svg" alt="健康保険証の見本イラスト" class="card-illust-img">
           </div>
-          <div class="en-card"><p>With this card, you pay 30% of the medical cost. Japan pays 70%. If you do not have this card, you must pay 100% of the cost.<br>If your Residence Registration (Juminhyo) is accepted, you can join National Health Insurance. If you work for a company, you join Social Insurance.</p></div>
+          <div class="pair-grid">
+            <div class="jp-card">
+              <p>びょういんの おかねが <span class="alert-red">3わり(30%)</span> に なります（70%は 日本 が はらいます）。<br>ほけんしょうがない と、10わり(100% ぜんぶ) はらいます。<br>・住民票(じゅうみんひょう)の てつづきがおわると、国民健康保険(こくみんけんこうほけん)に はいれます。<br>・会社(かいしゃ)で はたらくひとは、社会保険(しゃかいほけん)に はいれます。</p>
+            </div>
+            <div class="en-card"><p>With this card, you pay 30% of the medical cost. Japan pays 70%. If you do not have this card, you must pay 100% of the cost.<br>If your Residence Registration (Juminhyo) is accepted, you can join National Health Insurance. If you work for a company, you join Social Insurance.</p></div>
+          </div>
         </div>
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>③ マイナンバーカード</h3><span class="en-title">③ My Number Card</span></div>
-        <div class="pair-grid">
-          <div class="jp-card">
-            <p>日本(にほん)に すむ人(ひと)の こじんばんごうのカード。<br>保険証(ほけんしょう)と いっしょ にできる【マイナ保険証(ほけんしょう)】に できます。外国(がいこく)のひとは、いまのカードにしていないことが おおいです</p>
+        <div class="card-illust-layout">
+          <div class="card-illust-wrap">
+            <img src="../assets/card-mynumber.svg" alt="マイナンバーカードの見本イラスト" class="card-illust-img">
           </div>
-          <div class="en-card"><p>This is the personal number card for people who live in Japan. You can make it a "My Number Health Insurance Card". Many foreign residents do not make this card.</p></div>
+          <div class="pair-grid">
+            <div class="jp-card">
+              <p>日本(にほん)に すむ人(ひと)の こじんばんごうのカード。<br>保険証(ほけんしょう)と いっしょ にできる【マイナ保険証(ほけんしょう)】に できます。外国(がいこく)のひとは、いまのカードにしていないことが おおいです</p>
+            </div>
+            <div class="en-card"><p>This is the personal number card for people who live in Japan. You can make it a "My Number Health Insurance Card". Many foreign residents do not make this card.</p></div>
+          </div>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（びょういんの うけつけ）</span>
+        <p class="fill-sentence">
+          ① もっているカード：
+          <label style="margin-right: 12px; cursor: pointer;"><input id="p28-chk-rc" type="checkbox" checked> 在留カード</label>
+          <label style="margin-right: 12px; cursor: pointer;"><input id="p28-chk-hi" type="checkbox" checked> 健康保険証</label>
+          <label style="cursor: pointer;"><input id="p28-chk-mn" type="checkbox"> マイナンバーカード</label>
+        </p>
+        <p class="fill-sentence">
+          ② うけつけで：
+          すみません。<input id="p28-bring" type="text" class="blank-input" style="width: 240px;" placeholder="例: ざいりゅうカードと ほけんしょう" aria-label="もってきたカード"> を もってきました。
+        </p>
+        <p class="fill-sentence">
+          ③ ほけんしょうは
+          <select id="p28-status" class="blank-input" style="width: 190px;" aria-label="ほけんしょうのじょうたい">
+            <option value="もっています">もっています</option>
+            <option value="わすれました">わすれました</option>
+            <option value="まだありません">まだありません</option>
+          </select> 。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP28(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">28</div>
     </section>
 
@@ -66,6 +145,24 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function speakPracticeP28(btnEl) {
+      const checked = [];
+      if (document.getElementById('p28-chk-rc')?.checked) checked.push('ざいりゅうカード');
+      if (document.getElementById('p28-chk-hi')?.checked) checked.push('けんこうほけんしょう');
+      if (document.getElementById('p28-chk-mn')?.checked) checked.push('マイナンバーカード');
+
+      const bring = (document.getElementById('p28-bring')?.value || '').trim();
+      const status = (document.getElementById('p28-status')?.value || 'もっています').trim();
+
+      const parts = [];
+      const cardText = bring || (checked.length > 0 ? checked.join('と、') : 'ざいりゅうカードと、ほけんしょう');
+      parts.push(`すみません。${cardText}をもってきました。`);
+      parts.push(`ほけんしょうは、${status}。`);
+
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

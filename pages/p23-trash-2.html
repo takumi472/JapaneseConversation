@@ -4,7 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ごみを 出(だ)しても いいですか？（③・④・⑤） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .trash-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .trash-card-btn {
+      appearance: none;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      background: #FFFFFF;
+      padding: 8px 8px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: inherit;
+    }
+    .trash-card-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.14);
+    }
+    .trash-card-btn.playing {
+      border-color: var(--primary);
+      background: #EFF6FF;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    .trash-sprite-3x1 {
+      width: 100%;
+      aspect-ratio: 1 / 1.05;
+      border-radius: 8px;
+      background-image: url('../assets/trash-rules.jpg');
+      background-size: 300% auto;
+      background-repeat: no-repeat;
+      margin-bottom: 8px;
+    }
+    .trash-ja {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.35;
+    }
+    .trash-en {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    @media (max-width: 640px) {
+      .trash-grid-3 {
+        grid-template-columns: 1fr;
+      }
+      .trash-sprite-3x1 {
+        max-width: 240px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -24,9 +84,26 @@
     </div>
 
     <section class="slide-sheet">
-<div class="slide-sheet-head">
+      <div class="slide-sheet-head">
         <h2>ごみを 出(だ)しても いいですか？（つづき）</h2>
-        <p class="en-sub">③ どこに？ ／ ④ どんなふうに？ ／ ⑤ だれが そうじする？</p>
+        <p class="en-sub">③ どこに？ ／ ④ どんなふうに？ ／ ⑤ だれが そうじする？（絵を押すと音声が出ます🔊）</p>
+      </div>
+      <div class="trash-grid-3">
+        <button type="button" class="trash-card-btn" onclick="speakText('ネットのなかにいれます。', this)">
+          <div class="trash-sprite-3x1" style="background-position: 0% 50%;"></div>
+          <span class="trash-ja">ネットのなかに いれます 🔊</span>
+          <span class="trash-en">Put trash inside the net</span>
+        </button>
+        <button type="button" class="trash-card-btn" onclick="speakText('とうめいなふくろにいれて、うえをしばります。', this)">
+          <div class="trash-sprite-3x1" style="background-position: 50% 50%;"></div>
+          <span class="trash-ja">とうめいなふくろで しばります 🔊</span>
+          <span class="trash-en">Use a clear bag &amp; tie the top</span>
+        </button>
+        <button type="button" class="trash-card-btn" onclick="speakText('ビン、カン、ペットボトルは、わけてだします。', this)">
+          <div class="trash-sprite-3x1" style="background-position: 100% 50%;"></div>
+          <span class="trash-ja">ビン・カン・ペットボトルを わける 🔊</span>
+          <span class="trash-en">Separate bottles, cans &amp; PET</span>
+        </button>
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>③ どこに？ すてる ところ</h3></div>
@@ -61,6 +138,24 @@
           <div class="en-card"><p>A: Is there a person in charge of the garbage area?<br>B: Everyone in the neighborhood cleans it in turn. Even if it's not your turn, let's keep it clean together.</p></div>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（ごみだしの ばしょ・しつもん）</span>
+        <p class="fill-sentence">
+          ① わたしの ごみおきばは <input id="p23-place" type="text" class="blank-input" style="width: 220px;" placeholder="例: マンションの まえ" aria-label="ごみおきばのばしょ"> に あります。
+        </p>
+        <p class="fill-sentence">
+          ② あさ <input id="p23-time" type="text" inputmode="numeric" class="blank-input short" placeholder="例: 8" aria-label="ごみをだすじかん"> じ までに だします。
+        </p>
+        <p class="fill-sentence">
+          ③ すみません、<input id="p23-item" type="text" class="blank-input" style="width: 200px;" placeholder="例: ペットボトル・ビン" aria-label="ききたいごみ"> は どこに だしますか？
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP23(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">23</div>
     </section>
 
@@ -72,6 +167,22 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function speakPracticeP23(btnEl) {
+      const place = (document.getElementById('p23-place')?.value || '').trim();
+      const time = (document.getElementById('p23-time')?.value || '').trim();
+      const item = (document.getElementById('p23-item')?.value || '').trim();
+
+      const parts = [];
+      if (place) parts.push(`わたしのごみおきばは、${place}にあります。`);
+      if (time) parts.push(`あさ、${time}じまでにだします。`);
+      if (item) parts.push(`すみません、${item}はどこにだしますか？`);
+      if (parts.length === 0) {
+        parts.push('すみません、ごみはどこにだしますか？');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

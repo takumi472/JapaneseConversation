@@ -4,7 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>きんし① ➡ やってはいけない — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .sign-card-body {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .prohibit-sign {
+      width: 78px;
+      height: 78px;
+      flex-shrink: 0;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 4px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+    }
+    @media (max-width: 520px) {
+      .prohibit-sign {
+        width: 64px;
+        height: 64px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -35,8 +57,11 @@
       <div class="section-block">
         <div class="pair-grid">
           <div class="jp-card">
-            <div>
-              <p>禁煙(きんえん)<br>罰金(ばっきん) が あります。</p>
+            <div class="sign-card-body">
+              <img src="../assets/sign-no-smoking.svg" alt="禁煙のサイン" class="prohibit-sign">
+              <div>
+                <p>禁煙(きんえん)<br>罰金(ばっきん) が あります。</p>
+              </div>
             </div>
             <div class="card-speak-row">
               <button class="mp3-btn" type="button" onclick="playJP(1, this)">🔊 音声1を聞く</button>
@@ -51,8 +76,11 @@
       <div class="section-block">
         <div class="pair-grid">
           <div class="jp-card">
-            <div>
-              <p>立入禁止(たちいりきんし)<br>入(はい)っては いけません。<br>はいると、おおきな音(おと)が なります。</p>
+            <div class="sign-card-body">
+              <img src="../assets/sign-no-entry.svg" alt="立入禁止のサイン" class="prohibit-sign">
+              <div>
+                <p>立入禁止(たちいりきんし)<br>入(はい)っては いけません。<br>はいると、おおきな音(おと)が なります。</p>
+              </div>
             </div>
             <div class="card-speak-row">
               <button class="mp3-btn" type="button" onclick="playJP(2, this)">🔊 音声2を聞く</button>
@@ -67,8 +95,11 @@
       <div class="section-block">
         <div class="pair-grid">
           <div class="jp-card">
-            <div>
-              <p>ごみを すてては いけません。<br>※ ごみを 捨(す)てるな。</p>
+            <div class="sign-card-body">
+              <img src="../assets/sign-no-littering.svg" alt="ゴミ捨て禁止のサイン" class="prohibit-sign">
+              <div>
+                <p>ごみを すてては いけません。<br>※ ごみを 捨(す)てるな。</p>
+              </div>
             </div>
             <div class="card-speak-row">
               <button class="mp3-btn" type="button" onclick="playJP(3, this)">🔊 音声3を聞く</button>
@@ -91,6 +122,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

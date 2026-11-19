@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>いえるかな？ からだ の なまえ — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -111,6 +111,28 @@
           </button>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（からだ・くすり）</span>
+        <p class="fill-sentence">
+          ① <input id="p27-part" type="text" class="blank-input" style="width: 170px;" placeholder="例: のど・ひざ" aria-label="からだのばしょ"> が いたいです。
+        </p>
+        <p class="fill-sentence">
+          ② くすりは
+          <select id="p27-timing" class="blank-input" style="width: 195px;" aria-label="くすりののみかた">
+            <option value="しょくごに">しょくごに（食後）</option>
+            <option value="しょくぜんに">しょくぜんに（食前）</option>
+            <option value="ねるまえに">ねるまえに（寝る前）</option>
+            <option value="ひつようなときだけ">ひつようなときだけ</option>
+          </select>、
+          <input id="p27-tablets" type="text" inputmode="numeric" class="blank-input short" placeholder="例: 2" aria-label="じょうのかず"> 錠(じょう) のみます。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP27(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">27</div>
     </section>
 
@@ -122,6 +144,22 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function speakPracticeP27(btnEl) {
+      const part = (document.getElementById('p27-part')?.value || '').trim();
+      const timing = (document.getElementById('p27-timing')?.value || 'しょくごに').trim();
+      const tabRaw = (document.getElementById('p27-tablets')?.value || '').trim();
+
+      const parts = [];
+      if (part) {
+        parts.push(`${part}がいたいです。`);
+      }
+      const tabHalf = tabRaw.replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/[^\d]/g, '');
+      const tabText = tabHalf ? `${tabHalf}じょう` : (tabRaw || 'にじょう');
+      parts.push(`くすりは、${timing}、${tabText}のみます。`);
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

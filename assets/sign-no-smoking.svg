@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="禁煙サイン">
+  <circle cx="60" cy="60" r="52" fill="#FFFFFF"/>
+  <!-- Cigarette -->
+  <rect x="23" y="62" width="57" height="12" rx="2" fill="#1E293B"/>
+  <rect x="39" y="62" width="2.5" height="12" fill="#FFFFFF"/>
+  <rect x="83" y="62" width="6" height="12" rx="1" fill="#1E293B"/>
+  <rect x="91" y="62" width="4" height="12" rx="1" fill="#64748B"/>
+  <!-- Smoke -->
+  <path d="M86 57 C85 50, 94 49, 92 41 C90 35, 84 34, 87 27" fill="none" stroke="#475569" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M94 57 C95 51, 100 49, 98 42" fill="none" stroke="#64748B" stroke-width="2.6" stroke-linecap="round"/>
+  <!-- Prohibition ring & slash -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#DC2626" stroke-width="10"/>
+  <line x1="25" y1="25" x2="95" y2="95" stroke="#DC2626" stroke-width="10"/>
+</svg>

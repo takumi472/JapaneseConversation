@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>きょうは なんにち？ なんようび？ — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -68,6 +68,37 @@
         </div>
       </div>
 
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（ひづけ・ようび）</span>
+        <p class="fill-sentence">
+          ① きょうは
+          <input id="p20-month" type="text" inputmode="numeric" class="blank-input short" placeholder="月" aria-label="きょうの月"> 月(がつ)
+          <input id="p20-day" type="text" inputmode="numeric" class="blank-input short" placeholder="日" aria-label="きょうの日"> 日(にち)
+          <select id="p20-dow" class="blank-input" style="width: 145px;" aria-label="きょうのようび">
+            <option value="">ようび</option>
+            <option value="にちようび">にちようび（日）</option>
+            <option value="げつようび">げつようび（月）</option>
+            <option value="かようび">かようび（火）</option>
+            <option value="すいようび">すいようび（水）</option>
+            <option value="もくようび">もくようび（木）</option>
+            <option value="きんようび">きんようび（金）</option>
+            <option value="どようび">どようび（土）</option>
+          </select>
+          です。
+        </p>
+        <p class="fill-sentence">
+          ② たんじょうびは
+          <input id="p20-b-month" type="text" inputmode="numeric" class="blank-input short" placeholder="月" aria-label="たんじょうびの月"> 月(がつ)
+          <input id="p20-b-day" type="text" inputmode="numeric" class="blank-input short" placeholder="日" aria-label="たんじょうびの日"> 日(にち) です。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP20(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="fillTodayP20()">📅 きょうをいれる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">20</div>
     </section>
 
@@ -79,7 +110,7 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
   <script>
     const DAY_READINGS = {
       1: 'ついたち', 2: 'ふつか', 3: 'みっか', 4: 'よっか', 5: 'いつか',
@@ -158,6 +189,53 @@
 
     renderMonths();
     renderCalendar(1);
+
+    const DOW_LIST = ['にちようび', 'げつようび', 'かようび', 'すいようび', 'もくようび', 'きんようび', 'どようび'];
+
+    function toNumP20(raw) {
+      const half = String(raw || '').replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/[^\d]/g, '');
+      return half ? Number(half) : null;
+    }
+
+    function readMonthP20(raw) {
+      const n = toNumP20(raw);
+      const found = MONTHS.find((m) => m.num === n);
+      return found ? found.read : (raw ? `${raw}がつ` : '');
+    }
+
+    function readDayP20(raw) {
+      const n = toNumP20(raw);
+      return (n && DAY_READINGS[n]) ? DAY_READINGS[n] : (raw ? `${raw}にち` : '');
+    }
+
+    function fillTodayP20() {
+      const now = new Date();
+      document.getElementById('p20-month').value = String(now.getMonth() + 1);
+      document.getElementById('p20-day').value = String(now.getDate());
+      document.getElementById('p20-dow').value = DOW_LIST[now.getDay()];
+    }
+
+    function speakPracticeP20(btnEl) {
+      const m1 = (document.getElementById('p20-month')?.value || '').trim();
+      const d1 = (document.getElementById('p20-day')?.value || '').trim();
+      const dow = (document.getElementById('p20-dow')?.value || '').trim();
+      const m2 = (document.getElementById('p20-b-month')?.value || '').trim();
+      const d2 = (document.getElementById('p20-b-day')?.value || '').trim();
+
+      const parts = [];
+      if (m1 || d1 || dow) {
+        const s = [readMonthP20(m1), readDayP20(d1), dow].filter(Boolean).join('、');
+        parts.push(`きょうは、${s}です。`);
+      }
+      if (m2 || d2) {
+        const s = [readMonthP20(m2), readDayP20(d2)].filter(Boolean).join('、');
+        parts.push(`たんじょうびは、${s}です。`);
+      }
+      if (parts.length === 0) {
+        parts.push('きょうは、いちがつ、ついたち、げつようびです。');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
   </script>
 </body>
 </html>

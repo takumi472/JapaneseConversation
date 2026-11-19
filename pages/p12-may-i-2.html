@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>いいですか？② — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -58,6 +58,21 @@
           <div class="en-card"><p>May I turn on 〇〇?<br>May I turn on the light?<br>May I turn on the air conditioner?</p></div>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ</span>
+        <p class="fill-sentence">
+          ① <input id="p12-item-1" type="text" class="blank-input" style="width: 200px;" placeholder="〇〇（例: でんき・えあこん）" aria-label="つけてもいいもの"> を つけても いいですか？
+        </p>
+        <p class="fill-sentence">
+          ② <input id="p12-action-2" type="text" class="blank-input" style="width: 220px;" placeholder="〇〇（例: しゃしんをとって）" aria-label="してもいいこと"> も いいですか？
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP12(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">12</div>
     </section>
 
@@ -69,6 +84,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="立入禁止サイン">
+  <circle cx="60" cy="60" r="52" fill="#FFFFFF"/>
+  <!-- Walking person pictogram -->
+  <circle cx="58" cy="29" r="8" fill="#1E293B"/>
+  <path d="M51 41 C51 39, 63 39, 64 42 L61 64 L49 64 Z" fill="#1E293B"/>
+  <line x1="61" y1="44" x2="75" y2="55" stroke="#1E293B" stroke-width="7" stroke-linecap="round"/>
+  <line x1="52" y1="45" x2="39" y2="58" stroke="#1E293B" stroke-width="7" stroke-linecap="round"/>
+  <line x1="58" y1="63" x2="72" y2="89" stroke="#1E293B" stroke-width="8" stroke-linecap="round"/>
+  <line x1="51" y1="63" x2="40" y2="89" stroke="#1E293B" stroke-width="8" stroke-linecap="round"/>
+  <!-- Prohibition ring & slash -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#DC2626" stroke-width="10"/>
+  <line x1="25" y1="25" x2="95" y2="95" stroke="#DC2626" stroke-width="10"/>
+</svg>

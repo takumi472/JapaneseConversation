@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>わたし の かぞく — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -71,6 +71,24 @@
           <p>In Japanese, "kazoku" usually means the people who live together with you. This can be different from "family" in your country.<br>You can say: "My family has 〇 people."<br>"The people who live with me in Japan are 〇."</p>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ</span>
+        <p class="fill-sentence">
+          ① かぞくは <input id="p15-total" type="text" class="blank-input short" placeholder="〇" aria-label="かぞくのにんずう"> 人(にん) です。
+        </p>
+        <p class="fill-sentence">
+          ② 日本(にほん)で いっしょに すんでいるのは <input id="p15-japan" type="text" class="blank-input short" placeholder="〇" aria-label="にほんでいっしょにすんでいるにんずう"> 人(にん) です。
+        </p>
+        <p class="fill-sentence">
+          ③ わたしのかぞくは、<input id="p15-members" type="text" class="blank-input" style="width: 280px;" placeholder="例: おとうさん、おかあさん、わたし" aria-label="かぞくのメンバー"> です。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP15(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">15</div>
     </section>
 
@@ -82,6 +100,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

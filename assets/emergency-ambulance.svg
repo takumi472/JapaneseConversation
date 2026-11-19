@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" role="img" aria-label="きゅうきゅうしゃ（救急車）のイラスト">
+  <rect width="180" height="120" rx="14" fill="#FEF2F2"/>
+  <!-- Road -->
+  <rect x="10" y="96" width="160" height="6" rx="3" fill="#CBD5E1"/>
+  <!-- Red siren glow -->
+  <path d="M98 18 L94 11 M106 16 L106 9 M114 18 L118 11" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Siren light -->
+  <rect x="97" y="21" width="18" height="9" rx="4" fill="#DC2626"/>
+  <rect x="102" y="23" width="8" height="4" rx="2" fill="#FCA5A5"/>
+  <!-- Van body -->
+  <path d="M24 40 C24 33, 29 29, 36 29 L122 29 C129 29, 134 33, 138 41 L150 56 C155 59, 158 64, 158 70 L158 86 C158 90, 155 92, 151 92 L28 92 C25 92, 24 89, 24 86 Z" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2.5"/>
+  <!-- Red stripe (Japanese ambulance) -->
+  <rect x="25" y="66" width="132" height="9" fill="#DC2626"/>
+  <!-- Front window -->
+  <path d="M116 36 L130 36 L142 54 L116 54 Z" fill="#BAE6FD" stroke="#64748B" stroke-width="2"/>
+  <!-- Side window -->
+  <rect x="86" y="36" width="24" height="18" rx="3" fill="#BAE6FD" stroke="#64748B" stroke-width="2"/>
+  <!-- Red cross -->
+  <rect x="50" y="37" width="8" height="24" rx="1.5" fill="#DC2626"/>
+  <rect x="42" y="45" width="24" height="8" rx="1.5" fill="#DC2626"/>
+  <!-- Headlight -->
+  <rect x="150" y="68" width="7" height="8" rx="2" fill="#FDE047"/>
+  <!-- Wheels -->
+  <circle cx="52" cy="92" r="13" fill="#1E293B"/>
+  <circle cx="52" cy="92" r="6" fill="#CBD5E1"/>
+  <circle cx="130" cy="92" r="13" fill="#1E293B"/>
+  <circle cx="130" cy="92" r="6" fill="#CBD5E1"/>
+</svg>

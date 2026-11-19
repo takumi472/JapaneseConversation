@@ -4,7 +4,63 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ごみを 出(だ)しても いいですか？（①・②） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .trash-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 12px 0 16px;
+    }
+    .trash-card-btn {
+      appearance: none;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      background: #FFFFFF;
+      padding: 8px 8px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: inherit;
+    }
+    .trash-card-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.14);
+    }
+    .trash-card-btn.playing {
+      border-color: var(--primary);
+      background: #EFF6FF;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    .trash-sprite-2x2 {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 8px;
+      background-image: url('../assets/trash-types.jpg');
+      background-size: 200% 200%;
+      background-repeat: no-repeat;
+      margin-bottom: 6px;
+    }
+    .trash-ja {
+      font-size: 0.94rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .trash-en {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    @media (max-width: 720px) {
+      .trash-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -29,7 +85,29 @@
         <p class="en-sub">① ごみは なに？ 種類(しゅるい) ／ ② いつ？ ごみを だせる日(ひ)</p>
       </div>
       <div class="section-block">
-        <div class="section-heading"><h3>① ごみの 種類(しゅるい)</h3></div>
+        <div class="section-heading"><h3>① ごみの 種類(しゅるい)（絵を押すと音声が出ます🔊）</h3></div>
+        <div class="trash-grid-4">
+          <button type="button" class="trash-card-btn" onclick="speakText('もえるごみ', this)">
+            <div class="trash-sprite-2x2" style="background-position: 0% 0%;"></div>
+            <span class="trash-ja">もえるごみ 🔊</span>
+            <span class="trash-en">Burnable trash</span>
+          </button>
+          <button type="button" class="trash-card-btn" onclick="speakText('もえないごみ', this)">
+            <div class="trash-sprite-2x2" style="background-position: 100% 0%;"></div>
+            <span class="trash-ja">もえないごみ 🔊</span>
+            <span class="trash-en">Non-burnable trash</span>
+          </button>
+          <button type="button" class="trash-card-btn" onclick="speakText('しげんごみ', this)">
+            <div class="trash-sprite-2x2" style="background-position: 0% 100%;"></div>
+            <span class="trash-ja">資源(しげん)ごみ 🔊</span>
+            <span class="trash-en">Recyclable trash</span>
+          </button>
+          <button type="button" class="trash-card-btn" onclick="speakText('そだいごみ', this)">
+            <div class="trash-sprite-2x2" style="background-position: 100% 100%;"></div>
+            <span class="trash-ja">粗大(そだい)ごみ 🔊</span>
+            <span class="trash-en">Bulky trash</span>
+          </button>
+        </div>
         <table class="info-table">
           <thead><tr><th>ごみの名前</th><th>せつめい</th><th>Type / Explanation</th></tr></thead>
           <tbody>
@@ -57,6 +135,24 @@
         </div>
         <p class="en-line" style="margin-top:8px;">※このれい(さんぷる)では、もえるごみは 火(か)・木(もく)・土(ど)よう日(び)です。（In this example, burnable trash is collected on Tuesday, Thursday, and Saturday.）</p>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（わたしの ゴミカレンダー）</span>
+        <p class="fill-sentence">
+          ① もえるごみ は <input id="p22-burn" type="text" class="blank-input" style="width: 190px;" placeholder="例: か・もく・ど" aria-label="もえるごみのようび"> よう日(び) です。
+        </p>
+        <p class="fill-sentence">
+          ② もえないごみ は <input id="p22-nonburn" type="text" class="blank-input" style="width: 210px;" placeholder="例: すいようび" aria-label="もえないごみのひ"> です。
+        </p>
+        <p class="fill-sentence">
+          ③ 資源(しげん)ごみ は <input id="p22-recycle" type="text" class="blank-input" style="width: 210px;" placeholder="例: げつようび" aria-label="しげんごみのひ"> です。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP22(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">22</div>
     </section>
 
@@ -68,6 +164,22 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function speakPracticeP22(btnEl) {
+      const burn = (document.getElementById('p22-burn')?.value || '').trim();
+      const nonburn = (document.getElementById('p22-nonburn')?.value || '').trim();
+      const recycle = (document.getElementById('p22-recycle')?.value || '').trim();
+
+      const parts = [];
+      if (burn) parts.push(`もえるごみは、${burn}ようびです。`);
+      if (nonburn) parts.push(`もえないごみは、${nonburn}です。`);
+      if (recycle) parts.push(`しげんごみは、${recycle}です。`);
+      if (parts.length === 0) {
+        parts.push('もえるごみは、かようび、もくようび、どようびです。');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

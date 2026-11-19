@@ -4,7 +4,75 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>仕事(しごと)・しごとのなまえ — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .jobs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
+    .job-card-btn {
+      appearance: none;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      background: #FFFFFF;
+      padding: 8px 8px 10px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.14s ease, box-shadow 0.14s ease, border-color 0.14s ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: inherit;
+    }
+    .job-card-btn:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+      box-shadow: 0 6px 14px rgba(37, 99, 235, 0.14);
+    }
+    .job-card-btn.playing {
+      border-color: var(--primary);
+      background: #EFF6FF;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+    .job-sprite {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      border-radius: 8px;
+      background-image: url('../assets/jobs-chart.jpg');
+      background-size: 400% 300%;
+      background-repeat: no-repeat;
+      margin-bottom: 6px;
+    }
+    .job-ja {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+      line-height: 1.3;
+    }
+    .job-furi {
+      font-size: 0.76rem;
+      color: var(--primary);
+      font-weight: 600;
+    }
+    .job-en {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    @media (max-width: 700px) {
+      .jobs-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+    }
+    @media (max-width: 480px) {
+      .jobs-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -50,11 +118,36 @@
           <button class="speak-mini-btn" type="button" onclick="speakText('バングラディッシュでのしごとは、がっこうのせんせいでした。', this)">🔊 聞く</button>
         </div>
       </div>
+      <div class="section-block" style="margin-top: 18px;">
+        <div class="section-heading">
+          <h3>いろいろな しごとの なまえ（絵を押すと音声が出ます🔊）</h3>
+          <span class="en-title">Tap an illustration to hear the job name</span>
+        </div>
+        <div id="jobs-grid" class="jobs-grid"></div>
+      </div>
+
       <div class="ext-link-box">
         <p class="jp-line" style="font-size:1rem;">いろいろな しごとの なまえ（スライドショー）</p>
         <p class="en-line" style="margin-bottom:6px;">You can see various job names on the website below.</p>
         <a href="https://quileless-jalebi-2b6f60.netlify.app/slide1.png" target="_blank" rel="noopener noreferrer">https://quileless-jalebi-2b6f60.netlify.app/slide1.png</a>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（しごと）</span>
+        <p class="fill-sentence">
+          ① 日本(にほん)での 仕事(しごと)は
+          <input id="p30-jp-job" type="text" class="blank-input" style="width: 210px;" placeholder="例: かいしゃいん" aria-label="にほんでのしごと"> です。
+        </p>
+        <p class="fill-sentence">
+          ② <input id="p30-country" type="text" class="blank-input" style="width: 170px;" placeholder="くに（Country）" aria-label="くにのなまえ"> での 仕事(しごと)は
+          <input id="p30-home-job" type="text" class="blank-input" style="width: 210px;" placeholder="例: がっこうのせんせい" aria-label="くにでのしごと"> でした。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP30(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">30</div>
     </section>
 
@@ -66,6 +159,72 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    const JOBS_LIST = [
+      // Set 1
+      { ja: '会社員',       furi: 'かいしゃいん',       en: 'Office worker',    read: 'かいしゃいん',       img: '../assets/jobs-chart.jpg',   col: 0, row: 0 },
+      { ja: '先生',         furi: 'せんせい',           en: 'Teacher',          read: 'せんせい',           img: '../assets/jobs-chart.jpg',   col: 1, row: 0 },
+      { ja: 'お医者さん',   furi: 'おいしゃさん',       en: 'Doctor',           read: 'おいしゃさん',       img: '../assets/jobs-chart.jpg',   col: 2, row: 0 },
+      { ja: '看護師',       furi: 'かんごし',           en: 'Nurse',            read: 'かんごし',           img: '../assets/jobs-chart.jpg',   col: 3, row: 0 },
+      { ja: '料理人',       furi: 'りょうりにん',       en: 'Chef / Cook',      read: 'りょうりにん',       img: '../assets/jobs-chart.jpg',   col: 0, row: 1 },
+      { ja: '店員',         furi: 'てんいん',           en: 'Shop staff',       read: 'てんいん',           img: '../assets/jobs-chart.jpg',   col: 1, row: 1 },
+      { ja: '運転手',       furi: 'うんてんしゅ',       en: 'Driver',           read: 'うんてんしゅ',       img: '../assets/jobs-chart.jpg',   col: 2, row: 1 },
+      { ja: '工場の人',     furi: 'こうじょうのひと',   en: 'Factory worker',   read: 'こうじょうのひと',   img: '../assets/jobs-chart.jpg',   col: 3, row: 1 },
+      { ja: '介護士',       furi: 'かいごし',           en: 'Caregiver',        read: 'かいごし',           img: '../assets/jobs-chart.jpg',   col: 0, row: 2 },
+      { ja: '農家',         furi: 'のうか',             en: 'Farmer',           read: 'のうか',             img: '../assets/jobs-chart.jpg',   col: 1, row: 2 },
+      { ja: '警察官',       furi: 'けいさつかん',       en: 'Police officer',   read: 'けいさつかん',       img: '../assets/jobs-chart.jpg',   col: 2, row: 2 },
+      { ja: '学生',         furi: 'がくせい',           en: 'Student',          read: 'がくせい',           img: '../assets/jobs-chart.jpg',   col: 3, row: 2 },
+      // Set 2 (公務・IT・サービス等)
+      { ja: '公務員',       furi: 'こうむいん',         en: 'Civil servant',    read: 'こうむいん',         img: '../assets/jobs-chart-2.jpg', col: 0, row: 0 },
+      { ja: '消防士',       furi: 'しょうぼうし',       en: 'Firefighter',      read: 'しょうぼうし',       img: '../assets/jobs-chart-2.jpg', col: 1, row: 0 },
+      { ja: '郵便局員',     furi: 'ゆうびんきょくいん', en: 'Postal worker',    read: 'ゆうびんきょくいん', img: '../assets/jobs-chart-2.jpg', col: 2, row: 0 },
+      { ja: '駅員',         furi: 'えきいん',           en: 'Station staff',    read: 'えきいん',           img: '../assets/jobs-chart-2.jpg', col: 3, row: 0 },
+      { ja: 'ITエンジニア', furi: 'アイティーエンジニア', en: 'IT Engineer',    read: 'アイティーエンジニア', img: '../assets/jobs-chart-2.jpg', col: 0, row: 1 },
+      { ja: 'デザイナー',   furi: 'デザイナー',         en: 'Designer',         read: 'デザイナー',         img: '../assets/jobs-chart-2.jpg', col: 1, row: 1 },
+      { ja: '銀行員',       furi: 'ぎんこういん',       en: 'Bank clerk',       read: 'ぎんこういん',       img: '../assets/jobs-chart-2.jpg', col: 2, row: 1 },
+      { ja: '通訳',         furi: 'つうやく',           en: 'Interpreter',      read: 'つうやく',           img: '../assets/jobs-chart-2.jpg', col: 3, row: 1 },
+      { ja: '美容師',       furi: 'びようし',           en: 'Hairdresser',      read: 'びようし',           img: '../assets/jobs-chart-2.jpg', col: 0, row: 2 },
+      { ja: '大工・建設',   furi: 'だいく・けんせつ',   en: 'Construction',     read: 'だいく、けんせつ',   img: '../assets/jobs-chart-2.jpg', col: 1, row: 2 },
+      { ja: 'ホテルスタッフ', furi: 'ホテルスタッフ',   en: 'Hotel staff',      read: 'ホテルスタッフ',     img: '../assets/jobs-chart-2.jpg', col: 2, row: 2 },
+      { ja: '主婦・主夫',   furi: 'しゅふ',             en: 'Homemaker',        read: 'しゅふ',             img: '../assets/jobs-chart-2.jpg', col: 3, row: 2 }
+    ];
+
+    (function renderJobsGrid() {
+      const grid = document.getElementById('jobs-grid');
+      if (!grid) return;
+      const xPos = ['0%', '33.333%', '66.666%', '100%'];
+      const yPos = ['0%', '50%', '100%'];
+      JOBS_LIST.forEach((job) => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'job-card-btn';
+        btn.setAttribute('aria-label', `${job.ja}（${job.furi}）`);
+        btn.innerHTML = `
+          <div class="job-sprite" style="background-image: url('${job.img}'); background-position: ${xPos[job.col]} ${yPos[job.row]};"></div>
+          <span class="job-ja">${job.ja} 🔊</span>
+          <span class="job-furi">(${job.furi})</span>
+          <span class="job-en">${job.en}</span>
+        `;
+        btn.onclick = () => speakText(job.read, btn);
+        grid.appendChild(btn);
+      });
+    })();
+
+    function speakPracticeP30(btnEl) {
+      const jpJob = (document.getElementById('p30-jp-job')?.value || '').trim();
+      const country = (document.getElementById('p30-country')?.value || '').trim();
+      const homeJob = (document.getElementById('p30-home-job')?.value || '').trim();
+
+      const parts = [];
+      if (jpJob || (!country && !homeJob)) {
+        parts.push(`にほんでのしごとは、${jpJob || 'まるまる'}です。`);
+      }
+      if (country || homeJob || !jpJob) {
+        parts.push(`${country || 'くに'}でのしごとは、${homeJob || 'まるまる'}でした。`);
+      }
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

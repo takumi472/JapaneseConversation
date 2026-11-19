@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>びょういんで つかうことば（②：外科・専門科） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -112,6 +112,30 @@
           </button>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（げか・せんもんか）</span>
+        <p class="fill-sentence">
+          ① <input id="p26-event" type="text" class="blank-input" style="width: 190px;" placeholder="例: ころびました" aria-label="どうしましたか">。
+          <input id="p26-state" type="text" class="blank-input" style="width: 190px;" placeholder="例: あしがいたい" aria-label="ぐあい"> です。
+        </p>
+        <p class="fill-sentence">
+          ② <select id="p26-clinic" class="blank-input" style="width: 210px;" aria-label="しんりょうか">
+              <option value="げか">げか（外科）</option>
+              <option value="はいしゃ">はいしゃ（歯医者）</option>
+              <option value="がんか">がんか（眼科）</option>
+              <option value="ひふか">ひふか（皮膚科）</option>
+              <option value="じびいんこうか">じびいんこうか（耳鼻咽喉科）</option>
+              <option value="しょうにか">しょうにか（小児科）</option>
+              <option value="さんふじんか">さんふじんか（産婦人科）</option>
+            </select> に いきます。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP26(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">26</div>
     </section>
 
@@ -123,6 +147,19 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
+  <script>
+    function speakPracticeP26(btnEl) {
+      const ev = (document.getElementById('p26-event')?.value || '').trim();
+      const state = (document.getElementById('p26-state')?.value || '').trim();
+      const clinic = (document.getElementById('p26-clinic')?.value || 'げか').trim();
+
+      const parts = [];
+      if (ev) parts.push(`${ev}。`);
+      if (state) parts.push(`${state}です。`);
+      parts.push(`${clinic}にいきます。`);
+      speakText(parts.join(' '), btnEl);
+    }
+  </script>
 </body>
 </html>

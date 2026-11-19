@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="ゴミ捨て禁止サイン">
+  <circle cx="60" cy="60" r="52" fill="#FFFFFF"/>
+  <!-- Person dropping trash -->
+  <circle cx="44" cy="29" r="7.5" fill="#1E293B"/>
+  <path d="M38 40 C38 38, 50 38, 50 41 L49 64 L39 64 Z" fill="#1E293B"/>
+  <line x1="48" y1="44" x2="66" y2="51" stroke="#1E293B" stroke-width="6.5" stroke-linecap="round"/>
+  <line x1="40" y1="45" x2="34" y2="59" stroke="#1E293B" stroke-width="6" stroke-linecap="round"/>
+  <line x1="41" y1="63" x2="36" y2="89" stroke="#1E293B" stroke-width="7.5" stroke-linecap="round"/>
+  <line x1="47" y1="63" x2="53" y2="89" stroke="#1E293B" stroke-width="7.5" stroke-linecap="round"/>
+  <!-- Falling & scattered trash -->
+  <circle cx="71" cy="59" r="3.8" fill="#1E293B"/>
+  <rect x="74" y="67" width="9" height="6" rx="1.5" transform="rotate(22 78.5 70)" fill="#1E293B"/>
+  <polygon points="65,86 73,77 80,86" fill="#1E293B"/>
+  <rect x="81" y="81" width="9" height="5" rx="1.5" fill="#1E293B"/>
+  <!-- Prohibition ring & slash -->
+  <circle cx="60" cy="60" r="50" fill="none" stroke="#DC2626" stroke-width="10"/>
+  <line x1="25" y1="25" x2="95" y2="95" stroke="#DC2626" stroke-width="10"/>
+</svg>

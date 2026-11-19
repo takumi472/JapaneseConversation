@@ -4,7 +4,28 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>これ、ください（パンやさん） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .scene-figure {
+      margin: 0 0 18px;
+      text-align: center;
+    }
+    .scene-figure img {
+      width: 100%;
+      max-width: 680px;
+      height: auto;
+      border-radius: 14px;
+      border: 1px solid #FDE68A;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+      display: block;
+      margin: 0 auto;
+    }
+    .scene-caption {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -34,6 +55,10 @@
         <p class="en-line">Price including tax: 680 yen / Price without tax: 630 yen (food tax is 8%)</p>
         <p class="jp-note">たべもの は 8% ／ 店(みせ)で たべると 10%（※ Eating inside the shop is taxed at 10%.）</p>
       </div>
+      <figure class="scene-figure">
+        <img src="../assets/bakery-scene.jpg" alt="パンやさんでの買い物の会話場面（メロンパン1こ、いちごサンドイッチ1つ、バゲット2本）">
+        <figcaption class="scene-caption">🥖 パンやさんでの かいわ（メロンパン 1こ・いちごサンドイッチ 1つ・バゲット 2本）</figcaption>
+      </figure>
       <div class="pair-grid">
         <div class="jp-card">
           <div>
@@ -53,6 +78,26 @@
           <p>Baker: Your change is 320 yen. Thank you very much. Please come again.</p>
         </div>
       </div>
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（かいもの）</span>
+        <p class="fill-sentence">
+          ① <input id="p17-item-1" type="text" class="blank-input" style="width: 180px;" placeholder="例: メロンパン" aria-label="ほしいもの1"> を
+          <input id="p17-qty-1" type="text" class="blank-input short" style="width: 90px;" placeholder="例: 1こ" aria-label="かず1"> ください。
+        </p>
+        <p class="fill-sentence">
+          ② <input id="p17-item-2" type="text" class="blank-input" style="width: 180px;" placeholder="例: サンドイッチ" aria-label="ほしいもの2"> を
+          <input id="p17-qty-2" type="text" class="blank-input short" style="width: 90px;" placeholder="例: 1つ" aria-label="かず2"> ください。
+        </p>
+        <p class="fill-sentence">
+          ③ では、<input id="p17-yen" type="text" class="blank-input short" style="width: 110px;" placeholder="例: 1000" aria-label="はらうおかね"> 円(えん) で おねがいします。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP17(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">17</div>
     </section>
 
@@ -64,6 +109,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

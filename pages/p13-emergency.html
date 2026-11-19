@@ -4,7 +4,39 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>きんきゅう — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .emergency-card-row {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .emergency-illust {
+      width: 174px;
+      height: 116px;
+      flex-shrink: 0;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(15, 23, 42, 0.12);
+      display: block;
+    }
+    .emergency-info {
+      flex: 1;
+      min-width: 0;
+    }
+    @media (max-width: 600px) {
+      .emergency-card-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+      }
+      .emergency-illust {
+        width: 100%;
+        max-width: 240px;
+        height: auto;
+        margin: 0 auto;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -29,20 +61,59 @@
         <p class="en-sub">いつでも だいじょうぶ ／ まいにち 24じかん つかえます<br>Available anytime. Open 24 hours every day.</p>
       </div>
       <div class="emergency-card">
-        <h4>🚑 きゅうきゅうしゃ（Ambulance）</h4>
-        <div class="emergency-num">いのち の きけん は 119</div>
-        <p class="en-line">Call 119 for an ambulance.</p>
+        <div class="emergency-card-row">
+          <img src="../assets/emergency-ambulance.svg" alt="きゅうきゅうしゃのイラスト" class="emergency-illust">
+          <div class="emergency-info">
+            <h4>🚑 きゅうきゅうしゃ（Ambulance）</h4>
+            <div class="emergency-num">いのち の きけん は 119</div>
+            <p class="en-line">Call 119 for an ambulance.</p>
+          </div>
+        </div>
       </div>
       <div class="emergency-card">
-        <h4>🚒 しょうぼうしゃ（Fire Truck）</h4>
-        <div class="emergency-num">かじ は 119（きゅうきゅうしゃ と おなじ ばんごう）</div>
-        <p class="en-line">Call 119 for fire. (same number as ambulance).</p>
+        <div class="emergency-card-row">
+          <img src="../assets/emergency-firetruck.svg" alt="しょうぼうしゃのイラスト" class="emergency-illust">
+          <div class="emergency-info">
+            <h4>🚒 しょうぼうしゃ（Fire Truck）</h4>
+            <div class="emergency-num">かじ は 119（きゅうきゅうしゃ と おなじ ばんごう）</div>
+            <p class="en-line">Call 119 for fire. (same number as ambulance).</p>
+          </div>
+        </div>
       </div>
       <div class="emergency-card">
-        <h4>🚓 けいさつ・パトカー（Police / Patrol Car）</h4>
-        <div class="emergency-num">じけん、じこ、きけん は 110</div>
-        <p class="en-line">Call 110 for the police.</p>
+        <div class="emergency-card-row">
+          <img src="../assets/emergency-police.svg" alt="パトカーのイラスト" class="emergency-illust">
+          <div class="emergency-info">
+            <h4>🚓 けいさつ・パトカー（Police / Patrol Car）</h4>
+            <div class="emergency-num">じけん、じこ、きけん は 110</div>
+            <p class="en-line">Call 110 for the police.</p>
+          </div>
+        </div>
       </div>
+
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（でんわで つたえる）</span>
+        <p class="fill-sentence">
+          ① <select id="p13-type" class="blank-input" style="width: 210px;" aria-label="きゅうきゅう・かじ・けいさつ">
+              <option value="きゅうきゅうしゃを おねがいします">きゅうきゅうしゃ（119）</option>
+              <option value="かじです。しょうぼうしゃを おねがいします">かじ・しょうぼうしゃ（119）</option>
+              <option value="けいさつを おねがいします">けいさつ（110）</option>
+            </select> を おねがいします。
+        </p>
+        <p class="fill-sentence">
+          ② ばしょ（じゅうしょ）は <input id="p13-address" type="text" class="blank-input" style="width: 260px;" placeholder="じゅうしょ・めじるし" aria-label="ばしょやじゅうしょ"> です。
+        </p>
+        <p class="fill-sentence">
+          ③ わたしの なまえは <input id="p13-name" type="text" class="blank-input" style="width: 170px;" placeholder="なまえ" aria-label="なまえ"> です。
+          でんわばんごうは <input id="p13-phone" type="text" class="blank-input" style="width: 170px;" placeholder="090-0000-0000" aria-label="でんわばんごう"> です。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP13(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">13</div>
     </section>
 
@@ -54,6 +125,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

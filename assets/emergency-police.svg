@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 120" role="img" aria-label="パトカー（警察）のイラスト">
+  <rect width="180" height="120" rx="14" fill="#EFF6FF"/>
+  <!-- Road -->
+  <rect x="10" y="96" width="160" height="6" rx="3" fill="#CBD5E1"/>
+  <!-- Siren glow -->
+  <path d="M80 24 L76 17 M89 22 L89 15 M98 24 L102 17" stroke="#EF4444" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Red patrol light -->
+  <rect x="78" y="27" width="22" height="9" rx="4" fill="#DC2626"/>
+  <rect x="83" y="29" width="12" height="4" rx="2" fill="#FCA5A5"/>
+  <!-- Upper white body (Japanese police car) -->
+  <path d="M46 58 L62 37 C66 34, 71 33, 76 33 L108 33 C114 33, 118 35, 122 39 L136 58 L154 62 C158 63, 160 67, 160 72 L160 87 C160 90, 157 92, 154 92 L26 92 C23 92, 20 90, 20 87 L20 69 C20 64, 24 61, 30 60 Z" fill="#FFFFFF" stroke="#334155" stroke-width="2.5"/>
+  <!-- Lower black band (classic Japanese panda patocar) -->
+  <path d="M21 73 L159 73 L159 87 C159 90, 157 91, 154 91 L26 91 C23 91, 21 90, 21 87 Z" fill="#0F172A"/>
+  <!-- Windows -->
+  <path d="M66 40 L89 40 L89 56 L54 56 Z" fill="#BAE6FD" stroke="#475569" stroke-width="2"/>
+  <path d="M94 40 L114 40 L127 56 L94 56 Z" fill="#BAE6FD" stroke="#475569" stroke-width="2"/>
+  <!-- Gold police emblem -->
+  <polygon points="90,61 92,66 97,66 93,69 94.5,74 90,71 85.5,74 87,69 83,66 88,66" fill="#F59E0B" stroke="#B45309" stroke-width="0.8"/>
+  <!-- Headlight -->
+  <rect x="151" y="67" width="8" height="7" rx="2" fill="#FDE047"/>
+  <!-- Wheels -->
+  <circle cx="52" cy="92" r="13" fill="#1E293B"/>
+  <circle cx="52" cy="92" r="6" fill="#CBD5E1"/>
+  <circle cx="130" cy="92" r="13" fill="#1E293B"/>
+  <circle cx="130" cy="92" r="6" fill="#CBD5E1"/>
+</svg>

@@ -4,7 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ちょっと、すみません（みちあんない） — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
+  <style>
+    .dir-map-layout {
+      display: grid;
+      grid-template-columns: 1.15fr 1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .dir-map-layout .dialogue-group {
+      margin: 0;
+    }
+    .dir-map-box {
+      display: flex;
+      flex-direction: column;
+      background: #F8FAFC;
+      border: 1px solid #CBD5E1;
+      border-radius: 12px;
+      overflow: hidden;
+      min-height: 290px;
+    }
+    .dir-map-frame {
+      width: 100%;
+      flex: 1;
+      min-height: 250px;
+      border: 0;
+      display: block;
+    }
+    .dir-map-footer {
+      padding: 8px 12px;
+      background: #FFFFFF;
+      border-top: 1px solid #E2E8F0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+    }
+    .dir-map-link {
+      color: var(--primary);
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .dir-map-link:hover {
+      text-decoration: underline;
+    }
+    @media (max-width: 780px) {
+      .dir-map-layout {
+        grid-template-columns: 1fr;
+      }
+      .dir-map-frame {
+        min-height: 260px;
+      }
+    }
+  </style>
 </head>
 <body>
   <header class="top-bar">
@@ -30,53 +83,83 @@
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>🏥 春日部駅(かすかべえき)（西口）➡ 医療(いりょう)センター</h3></div>
-        <div class="dialogue-group">
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">① 医療(いりょう)センターは どこ ですか。</p>
-              <p class="en-line">① Where is the medical center?</p>
+        <div class="dir-map-layout">
+          <div class="dialogue-group">
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">① 医療(いりょう)センターは どこ ですか。</p>
+                <p class="en-line">① Where is the medical center?</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('いりょうセンターはどこですか。', this)">🔊 聞く</button>
             </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('いりょうセンターはどこですか。', this)">🔊 聞く</button>
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">② ふじ通(どお)りを まっすぐ いって、ビックA で 左(ひだり) です。</p>
+                <p class="en-line">② Go straight on Fuji Street and turn left at Big-A.</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('ふじどおりをまっすぐいって、ビックエーでひだりです。', this)">🔊 聞く</button>
+            </div>
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">③ 右(みぎ) に あります。</p>
+                <p class="en-line">③ It's on the right.</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('みぎにあります。', this)">🔊 聞く</button>
+            </div>
           </div>
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">② ふじ通(どお)りを まっすぐ いって、ビックA で 左(ひだり) です。</p>
-              <p class="en-line">② Go straight on Fuji Street and turn left at Big-A.</p>
+          <div class="dir-map-box">
+            <iframe
+              class="dir-map-frame"
+              title="春日部駅西口から春日部市立医療センターの地図"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=%E6%98%A5%E6%97%A5%E9%83%A8%E5%B8%82%E7%AB%8B%E5%8C%BB%E7%99%82%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC&amp;ll=35.9770,139.7519&amp;z=15&amp;hl=ja&amp;output=embed">
+            </iframe>
+            <div class="dir-map-footer">
+              <span>📍 春日部市立医療センター周辺</span>
+              <a class="dir-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E6%98%A5%E6%97%A5%E9%83%A8%E9%A7%85%E8%A5%BF%E5%8F%A3&amp;destination=%E6%98%A5%E6%97%A5%E9%83%A8%E5%B8%82%E7%AB%8B%E5%8C%BB%E7%99%82%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">🗺️ ルートを見る ↗</a>
             </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('ふじどおりをまっすぐいって、ビックエーでひだりです。', this)">🔊 聞く</button>
-          </div>
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">③ 右(みぎ) に あります。</p>
-              <p class="en-line">③ It's on the right.</p>
-            </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('みぎにあります。', this)">🔊 聞く</button>
           </div>
         </div>
       </div>
       <div class="section-block">
         <div class="section-heading"><h3>🚓 春日部駅(かすかべえき)（西口）➡ 警察署(けいさつしょ)</h3></div>
-        <div class="dialogue-group">
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">① 警察署(けいさつしょ)は どこですか？ さいふが 見(み)つかったと 連絡(れんらく)が ありました</p>
-              <p class="en-line">① Where is police station? I received a call that my wallet was found.</p>
+        <div class="dir-map-layout">
+          <div class="dialogue-group">
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">① 警察署(けいさつしょ)は どこですか？ さいふが 見(み)つかったと 連絡(れんらく)が ありました</p>
+                <p class="en-line">① Where is police station? I received a call that my wallet was found.</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('けいさつしょはどこですか？さいふがみつかったとれんらくがありました。', this)">🔊 聞く</button>
             </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('けいさつしょはどこですか？さいふがみつかったとれんらくがありました。', this)">🔊 聞く</button>
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">② 駅前(えきまえ)を まっすぐ いって、郵便局(ゆうびんきょく)を とおります。</p>
+                <p class="en-line">② Go straight and pass the post office.</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('えきまえをまっすぐいって、ゆうびんきょくをとおります。', this)">🔊 聞く</button>
+            </div>
+            <div class="dialogue-line">
+              <div class="dialogue-content">
+                <p class="jp-line">③ そのまま まっすぐいくと、右(みぎ)に 警察署(けいさつしょ)が あります</p>
+                <p class="en-line">③ If you go straight ahead, you'll find the police station on the right.</p>
+              </div>
+              <button class="speak-mini-btn" type="button" onclick="speakText('そのまままっすぐいくと、みぎにけいさつしょがあります。', this)">🔊 聞く</button>
+            </div>
           </div>
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">② 駅前(えきまえ)を まっすぐ いって、郵便局(ゆうびんきょく)を とおります。</p>
-              <p class="en-line">② Go straight and pass the post office.</p>
+          <div class="dir-map-box">
+            <iframe
+              class="dir-map-frame"
+              title="春日部駅西口から春日部警察署の地図"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://maps.google.com/maps?q=%E6%98%A5%E6%97%A5%E9%83%A8%E8%AD%A6%E5%AF%9F%E7%BD%B2&amp;ll=35.9730,139.7498&amp;z=14&amp;hl=ja&amp;output=embed">
+            </iframe>
+            <div class="dir-map-footer">
+              <span>📍 春日部警察署・郵便局周辺</span>
+              <a class="dir-map-link" href="https://www.google.com/maps/dir/?api=1&amp;origin=%E6%98%A5%E6%97%A5%E9%83%A8%E9%A7%85%E8%A5%BF%E5%8F%A3&amp;destination=%E6%98%A5%E6%97%A5%E9%83%A8%E8%AD%A6%E5%AF%9F%E7%BD%B2&amp;travelmode=walking" target="_blank" rel="noopener noreferrer">🗺️ ルートを見る ↗</a>
             </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('えきまえをまっすぐいって、ゆうびんきょくをとおります。', this)">🔊 聞く</button>
-          </div>
-          <div class="dialogue-line">
-            <div class="dialogue-content">
-              <p class="jp-line">③ そのまま まっすぐいくと、右(みぎ)に 警察署(けいさつしょ)が あります</p>
-              <p class="en-line">③ If you go straight ahead, you'll find the police station on the right.</p>
-            </div>
-            <button class="speak-mini-btn" type="button" onclick="speakText('そのまままっすぐいくと、みぎにけいさつしょがあります。', this)">🔊 聞く</button>
           </div>
         </div>
       </div>
@@ -96,6 +179,6 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
 </body>
 </html>

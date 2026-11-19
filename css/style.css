@@ -1143,85 +1143,207 @@ input:focus-visible {
   margin: 0;
 }
 
-/* 3D Book Page-Turn Transition */
+/* Realistic 3D Book Page-Turn Transition */
 @view-transition {
   navigation: auto;
 }
 
 body {
-  perspective: 1600px;
+  perspective: 2200px;
+  perspective-origin: 50% 42%;
+  overflow-x: hidden;
 }
 
 main.container {
+  position: relative;
   transform-style: preserve-3d;
   transform-origin: left center;
-  animation: bookPageEnterNext 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform, opacity, filter;
+  animation: bookPageEnterNext 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+main.container::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.24) 0%,
+    rgba(15, 23, 42, 0.08) 28%,
+    rgba(255, 255, 255, 0.16) 52%,
+    rgba(15, 23, 42, 0.0) 80%
+  );
+  animation: pageShadowEnterNext 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 main.container.enter-prev {
   transform-origin: right center;
-  animation: bookPageEnterPrev 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation: bookPageEnterPrev 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+main.container.enter-prev::after {
+  background: linear-gradient(
+    270deg,
+    rgba(15, 23, 42, 0.24) 0%,
+    rgba(15, 23, 42, 0.08) 28%,
+    rgba(255, 255, 255, 0.16) 52%,
+    rgba(15, 23, 42, 0.0) 80%
+  );
+  animation: pageShadowEnterPrev 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 main.container.exit-next {
   transform-origin: left center;
-  animation: bookPageExitNext 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+  animation: bookPageExitNext 0.36s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+main.container.exit-next::after {
+  background: linear-gradient(
+    90deg,
+    rgba(15, 23, 42, 0.0) 0%,
+    rgba(255, 255, 255, 0.22) 40%,
+    rgba(15, 23, 42, 0.32) 100%
+  );
+  animation: pageShadowExit 0.36s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 
 main.container.exit-prev {
   transform-origin: right center;
-  animation: bookPageExitPrev 0.24s cubic-bezier(0.4, 0, 1, 1) forwards;
+  animation: bookPageExitPrev 0.36s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
+}
+
+main.container.exit-prev::after {
+  background: linear-gradient(
+    270deg,
+    rgba(15, 23, 42, 0.0) 0%,
+    rgba(255, 255, 255, 0.22) 40%,
+    rgba(15, 23, 42, 0.32) 100%
+  );
+  animation: pageShadowExit 0.36s cubic-bezier(0.4, 0.0, 0.2, 1) forwards;
 }
 
 @keyframes bookPageEnterNext {
   0% {
-    opacity: 0;
-    transform: rotateY(16deg) translateX(24px);
+    opacity: 0.15;
+    transform: rotateY(22deg) translateX(28px) scale(0.98);
+    filter: brightness(0.92);
+  }
+  55% {
+    opacity: 1;
+    filter: brightness(0.99);
   }
   100% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0);
+    transform: rotateY(0deg) translateX(0) scale(1);
+    filter: brightness(1);
   }
 }
 
 @keyframes bookPageEnterPrev {
   0% {
-    opacity: 0;
-    transform: rotateY(-16deg) translateX(-24px);
+    opacity: 0.15;
+    transform: rotateY(-22deg) translateX(-28px) scale(0.98);
+    filter: brightness(0.92);
+  }
+  55% {
+    opacity: 1;
+    filter: brightness(0.99);
   }
   100% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0);
+    transform: rotateY(0deg) translateX(0) scale(1);
+    filter: brightness(1);
   }
 }
 
 @keyframes bookPageExitNext {
   0% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0);
+    transform: rotateY(0deg) translateX(0) scale(1);
+    filter: brightness(1);
+    box-shadow: 0 0 0 rgba(15, 23, 42, 0);
+  }
+  45% {
+    opacity: 0.96;
+    transform: rotateY(-28deg) translateX(-12px) scale(0.99);
+    filter: brightness(0.96);
+    box-shadow: 24px 12px 36px rgba(15, 23, 42, 0.22);
   }
   100% {
     opacity: 0;
-    transform: rotateY(-18deg) translateX(-24px);
+    transform: rotateY(-74deg) translateX(-36px) scale(0.96);
+    filter: brightness(0.82);
+    box-shadow: 40px 18px 48px rgba(15, 23, 42, 0.28);
   }
 }
 
 @keyframes bookPageExitPrev {
   0% {
     opacity: 1;
-    transform: rotateY(0deg) translateX(0);
+    transform: rotateY(0deg) translateX(0) scale(1);
+    filter: brightness(1);
+    box-shadow: 0 0 0 rgba(15, 23, 42, 0);
+  }
+  45% {
+    opacity: 0.96;
+    transform: rotateY(28deg) translateX(12px) scale(0.99);
+    filter: brightness(0.96);
+    box-shadow: -24px 12px 36px rgba(15, 23, 42, 0.22);
   }
   100% {
     opacity: 0;
-    transform: rotateY(18deg) translateX(24px);
+    transform: rotateY(74deg) translateX(36px) scale(0.96);
+    filter: brightness(0.82);
+    box-shadow: -40px 18px 48px rgba(15, 23, 42, 0.28);
+  }
+}
+
+@keyframes pageShadowEnterNext {
+  0% {
+    opacity: 0.9;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-28%);
+  }
+}
+
+@keyframes pageShadowEnterPrev {
+  0% {
+    opacity: 0.9;
+    transform: translateX(0%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(28%);
+  }
+}
+
+@keyframes pageShadowExit {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   main.container,
+  main.container::after,
   main.container.enter-prev,
+  main.container.enter-prev::after,
   main.container.exit-next,
-  main.container.exit-prev {
+  main.container.exit-next::after,
+  main.container.exit-prev,
+  main.container.exit-prev::after {
     animation: none !important;
   }
 }

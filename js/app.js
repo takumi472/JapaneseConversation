@@ -40,6 +40,47 @@ function playJP(num, btnEl) {
   audio.play();
 }
 
+const MONTH_READINGS = {
+  1: 'いちがつ',
+  2: 'にがつ',
+  3: 'さんがつ',
+  4: 'しがつ',
+  5: 'ごがつ',
+  6: 'ろくがつ',
+  7: 'しちがつ',
+  8: 'はちがつ',
+  9: 'くがつ',
+  10: 'じゅうがつ',
+  11: 'じゅういちがつ',
+  12: 'じゅうにがつ',
+};
+
+function toHalfWidthDigits(str) {
+  return String(str).replace(/[０-９]/g, (ch) =>
+    String.fromCharCode(ch.charCodeAt(0) - 0xfee0)
+  );
+}
+
+function formatMonthReading(rawMonth) {
+  const normalized = toHalfWidthDigits(rawMonth).trim().replace(/(?:月|がつ)$/, '');
+  if (/^\d+$/.test(normalized)) {
+    const num = Number(normalized);
+    if (MONTH_READINGS[num]) return MONTH_READINGS[num];
+  }
+  const trimmed = rawMonth.trim();
+  return /(?:月|がつ)$/.test(trimmed) ? trimmed : `${trimmed}がつ`;
+}
+
+function normalizeSpeechText(text) {
+  return toHalfWidthDigits(text).replace(
+    /(^|[^\d])(1[0-2]|[1-9])(?:月|がつ)/g,
+    (match, prefix, numStr) => {
+      const reading = MONTH_READINGS[Number(numStr)];
+      return reading ? `${prefix}${reading}` : match;
+    }
+  );
+}
+
 function speakText(text, btnEl) {
   if (!('speechSynthesis' in window)) return;
 
@@ -51,7 +92,7 @@ function speakText(text, btnEl) {
   }
   if (isSame) return;
 
-  const utter = new SpeechSynthesisUtterance(text);
+  const utter = new SpeechSynthesisUtterance(normalizeSpeechText(text));
   utter.lang = 'ja-JP';
   utter.rate = localStorage.getItem('kaiwa1_slow') === '1' ? 0.72 : 0.95;
 
@@ -93,19 +134,182 @@ function speakSummary(btnEl) {
     origin = `${city}から、`;
   }
 
+  const normalizedYear = toHalfWidthDigits(year).replace(/(?:年|ねん)$/, '');
+  const monthReading = month ? formatMonthReading(month) : '';
+
   let datePart = '';
-  if (year && month) {
-    datePart = `${year}ねん${month}がつに きました。`;
-  } else if (year) {
-    datePart = `${year}ねんに きました。`;
-  } else if (month) {
-    datePart = `${month}がつに きました。`;
+  if (normalizedYear && monthReading) {
+    datePart = `${normalizedYear}ねん${monthReading}に きました。`;
+  } else if (normalizedYear) {
+    datePart = `${normalizedYear}ねんに きました。`;
+  } else if (monthReading) {
+    datePart = `${monthReading}に きました。`;
   } else {
     datePart = 'きました。';
   }
 
   parts.push(origin + datePart);
   parts.push('よろしくおねがいします。');
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP3(btnEl) {
+  const nameA = (document.getElementById('p3-name-a')?.value || '').trim() || 'まるまる';
+  const nameBCall = (document.getElementById('p3-name-b-call')?.value || '').trim() || nameA;
+  const nameB = (document.getElementById('p3-name-b')?.value || '').trim() || 'まるまる';
+
+  const text = `はじめまして。${nameA}といいます。${nameBCall}さんですね。わたしは、${nameB}といいます。よろしくおねがいします。`;
+  speakText(text, btnEl);
+}
+
+function speakPracticeP4(btnEl) {
+  const req1 = (document.getElementById('p4-req-1')?.value || '').trim();
+  const req2 = (document.getElementById('p4-req-2')?.value || '').trim();
+
+  const parts = [];
+  if (req1 || !req2) {
+    parts.push(`すみません。${req1 || 'まるまる'}してください。`);
+  }
+  if (req2 || !req1) {
+    parts.push(`${req2 || 'まるまる'}できますか？`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP7(btnEl) {
+  const food1 = (document.getElementById('p7-food-1')?.value || '').trim();
+  const food2 = (document.getElementById('p7-food-2')?.value || '').trim();
+
+  const parts = [];
+  if (food1 || !food2) {
+    parts.push(`しゅうきょうじょう、${food1 || 'まるまる'}はたべれません。`);
+  }
+  if (food2 || !food1) {
+    parts.push(`わたしはアレルギーがあるので、${food2 || 'まるまる'}はたべれません。`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP12(btnEl) {
+  const item1 = (document.getElementById('p12-item-1')?.value || '').trim();
+  const action2 = (document.getElementById('p12-action-2')?.value || '').trim();
+
+  const parts = [];
+  if (item1 || !action2) {
+    parts.push(`${item1 || 'まるまる'}をつけてもいいですか？`);
+  }
+  if (action2 || !item1) {
+    parts.push(`${action2 || 'まるまるして'}もいいですか？`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP13(btnEl) {
+  const typeText = (document.getElementById('p13-type')?.value || 'きゅうきゅうしゃを おねがいします').trim();
+  const address = (document.getElementById('p13-address')?.value || '').trim();
+  const name = (document.getElementById('p13-name')?.value || '').trim();
+  const phone = (document.getElementById('p13-phone')?.value || '').trim();
+
+  const parts = [`${typeText}。`];
+  parts.push(`ばしょは、${address || 'まるまる'}です。`);
+  if (name) {
+    parts.push(`わたしのなまえは、${name}です。`);
+  }
+  if (phone) {
+    parts.push(`でんわばんごうは、${phone}です。`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+const PEOPLE_READINGS = {
+  1: 'ひとり',
+  2: 'ふたり',
+  3: 'さんにん',
+  4: 'よにん',
+  5: 'ごにん',
+  6: 'ろくにん',
+  7: 'ななにん',
+  8: 'はちにん',
+  9: 'きゅうにん',
+  10: 'じゅうにん',
+};
+
+function formatPeopleReading(rawCount) {
+  const normalized = toHalfWidthDigits(rawCount).trim().replace(/(?:人|にん)$/, '');
+  if (/^\d+$/.test(normalized)) {
+    const num = Number(normalized);
+    if (PEOPLE_READINGS[num]) return PEOPLE_READINGS[num];
+    return `${num}にん`;
+  }
+  const trimmed = rawCount.trim();
+  return /(?:人|にん|ひとり|ふたり)$/.test(trimmed) ? trimmed : `${trimmed}にん`;
+}
+
+function speakPracticeP15(btnEl) {
+  const total = (document.getElementById('p15-total')?.value || '').trim();
+  const japan = (document.getElementById('p15-japan')?.value || '').trim();
+  const members = (document.getElementById('p15-members')?.value || '').trim();
+
+  const parts = [];
+  if (total || (!japan && !members)) {
+    parts.push(`かぞくは、${total ? formatPeopleReading(total) : 'まるにん'}です。`);
+  }
+  if (japan || (!total && !members)) {
+    parts.push(`にほんでいっしょにすんでいるのは、${japan ? formatPeopleReading(japan) : 'まるにん'}です。`);
+  }
+  if (members) {
+    parts.push(`わたしのかぞくは、${members}です。`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP16(btnEl) {
+  const hobby1 = (document.getElementById('p16-hobby-1')?.value || '').trim();
+  const hobby2 = (document.getElementById('p16-hobby-2')?.value || '').trim();
+
+  const parts = [];
+  if (hobby1 || !hobby2) {
+    parts.push(`わたしのしゅみは、${hobby1 || 'まるまる'}です。`);
+  }
+  if (hobby2 || !hobby1) {
+    parts.push(`${hobby2 || 'まるまる'}することがすきです。`);
+  }
+
+  speakText(parts.join(' '), btnEl);
+}
+
+function speakPracticeP17(btnEl) {
+  const item1 = (document.getElementById('p17-item-1')?.value || '').trim();
+  const qty1 = (document.getElementById('p17-qty-1')?.value || '').trim();
+  const item2 = (document.getElementById('p17-item-2')?.value || '').trim();
+  const qty2 = (document.getElementById('p17-qty-2')?.value || '').trim();
+  const yenRaw = (document.getElementById('p17-yen')?.value || '').trim();
+
+  const orders = [];
+  if (item1) {
+    orders.push(`${item1}を${qty1 ? ` ${qty1}` : ''}`);
+  }
+  if (item2) {
+    orders.push(`${item2}を${qty2 ? ` ${qty2}` : ''}`);
+  }
+
+  const parts = [];
+  if (orders.length > 0) {
+    parts.push(`${orders.join(' と、')} ください。`);
+  } else {
+    parts.push('これを ください。');
+  }
+
+  if (yenRaw) {
+    const normalizedYen = toHalfWidthDigits(yenRaw).replace(/(?:円|えん)$/, '');
+    parts.push(`では、${normalizedYen}えんで おねがいします。`);
+  }
 
   speakText(parts.join(' '), btnEl);
 }
@@ -121,7 +325,16 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// 3D Book Page-Turn Transition
+// Realistic 3D Book Page-Turn Transition
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    const main = document.querySelector('main.container');
+    if (main) {
+      main.classList.remove('exit-next', 'exit-prev', 'enter-prev');
+    }
+  }
+});
+
 document.addEventListener('DOMContentLoaded', () => {
   const main = document.querySelector('main.container');
   if (!main) return;
@@ -132,6 +345,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   sessionStorage.removeItem('pageTurnDir');
 
+  let isNavigating = false;
+
   document.querySelectorAll('a[href]').forEach((link) => {
     const href = link.getAttribute('href');
     if (!href || href.startsWith('#') || href.startsWith('http') || link.target === '_blank' || link.classList.contains('disabled')) {
@@ -139,8 +354,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     link.addEventListener('click', (e) => {
-      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || isNavigating) return;
       e.preventDefault();
+      isNavigating = true;
 
       const isPrev = link.classList.contains('nav-prev') || href.includes('index.html') || href.includes('toc.html');
       const turnDir = isPrev && !link.closest('.cover-box') ? 'prev' : 'next';
@@ -149,9 +365,10 @@ document.addEventListener('DOMContentLoaded', () => {
       main.classList.remove('enter-prev');
       main.classList.add(turnDir === 'prev' ? 'exit-prev' : 'exit-next');
 
+      const delay = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 0 : 340;
       setTimeout(() => {
         window.location.href = link.href;
-      }, 220);
+      }, delay);
     });
   });
 

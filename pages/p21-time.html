@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>いまのじかん — にほんご かいわ1</title>
-  <link rel="stylesheet" href="../css/style.css?v=9">
+  <link rel="stylesheet" href="../css/style.css?v=10">
 </head>
 <body>
   <header class="top-bar">
@@ -84,6 +84,33 @@
         </div>
       </div>
 
+      <!-- れんしゅうメモ -->
+      <div class="summary-box">
+        <span class="summary-badge">れんしゅうメモ（じかん）</span>
+        <p class="fill-sentence">
+          ① いま
+          <select id="p21-ampm" class="blank-input" style="width: 120px;" aria-label="ごぜん・ごご">
+            <option value="">（なし）</option>
+            <option value="ごぜん">ごぜん（AM）</option>
+            <option value="ごご">ごご（PM）</option>
+          </select>
+          <input id="p21-now-h" type="text" inputmode="numeric" class="blank-input short" placeholder="じ" aria-label="いまのじ"> じ
+          <input id="p21-now-m" type="text" inputmode="numeric" class="blank-input short" placeholder="ふん" aria-label="いまのふん"> ふん(ぷん) です。
+        </p>
+        <p class="fill-sentence">
+          ② きょうしつ（しごと）は
+          <input id="p21-start-h" type="text" inputmode="numeric" class="blank-input short" placeholder="じ" aria-label="はじまるじ"> じ
+          <input id="p21-start-m" type="text" inputmode="numeric" class="blank-input short" placeholder="ふん" aria-label="はじまるふん"> ふん に はじまります。
+          <input id="p21-end-h" type="text" inputmode="numeric" class="blank-input short" placeholder="じ" aria-label="おわるじ"> じ
+          <input id="p21-end-m" type="text" inputmode="numeric" class="blank-input short" placeholder="ふん" aria-label="おわるふん"> ふん に おわります。
+        </p>
+        <div class="summary-actions">
+          <button class="nav-btn primary" type="button" onclick="speakPracticeP21(this)">🔊 れんしゅうを読み上げる</button>
+          <button class="nav-btn" type="button" onclick="fillNowTimeP21()">🕒 いまのじかんをいれる</button>
+          <button class="nav-btn" type="button" onclick="window.print()">🖨 印刷する</button>
+        </div>
+      </div>
+
       <div class="slide-page-num">21</div>
     </section>
 
@@ -95,7 +122,7 @@
   </main>
 
   <footer class="site-footer">にほんご かいわ1 教材シリーズ</footer>
-  <script src="../js/app.js?v=2"></script>
+  <script src="../js/app.js?v=9"></script>
   <script>
     const CLOCKS = [
       { h: 10, m: 30, label: '10:30', read: 'じゅうじ さんじゅっぷん', en: 'ten thirty' },
@@ -141,6 +168,94 @@
       btn.onclick = () => speakText(c.read, btn);
       grid.appendChild(btn);
     });
+
+    const HOUR_READINGS = {
+      0: 'れいじ', 1: 'いちじ', 2: 'にじ', 3: 'さんじ', 4: 'よじ', 5: 'ごじ',
+      6: 'ろくじ', 7: 'しちじ', 8: 'はちじ', 9: 'くじ', 10: 'じゅうじ',
+      11: 'じゅういちじ', 12: 'じゅうにじ', 13: 'じゅうさんじ', 14: 'じゅうよじ',
+      15: 'じゅうごじ', 16: 'じゅうろくじ', 17: 'じゅうしちじ', 18: 'じゅうはちじ',
+      19: 'じゅうくじ', 20: 'にじゅうじ', 21: 'にじゅういちじ', 22: 'にじゅうにじ',
+      23: 'にじゅうさんじ', 24: 'にじゅうよじ'
+    };
+
+    const MIN_ONES = {
+      1: 'いっぷん', 2: 'にふん', 3: 'さんぷん', 4: 'よんぷん', 5: 'ごふん',
+      6: 'ろっぷん', 7: 'ななふん', 8: 'はっぷん', 9: 'きゅうふん'
+    };
+
+    const MIN_TENS = {
+      1: 'じゅう', 2: 'にじゅう', 3: 'さんじゅう', 4: 'よんじゅう', 5: 'ごじゅう'
+    };
+
+    function toNumP21(raw) {
+      const half = String(raw || '').replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0)).replace(/[^\d]/g, '');
+      return half !== '' ? Number(half) : null;
+    }
+
+    function readHourP21(raw) {
+      const n = toNumP21(raw);
+      if (n === null) return '';
+      return HOUR_READINGS[n] || `${n}じ`;
+    }
+
+    function readMinuteP21(raw) {
+      const n = toNumP21(raw);
+      if (n === null || n === 0) return '';
+      if (n < 10) return MIN_ONES[n];
+      const tens = Math.floor(n / 10);
+      const ones = n % 10;
+      if (ones === 0) {
+        return tens === 1 ? 'じゅっぷん' : `${MIN_TENS[tens].replace(/ゅう$/, 'ゅっ')}ぷん`;
+      }
+      return `${MIN_TENS[tens] || ''}${MIN_ONES[ones] || ''}`;
+    }
+
+    function readTimePairP21(hRaw, mRaw) {
+      const h = readHourP21(hRaw);
+      const m = readMinuteP21(mRaw);
+      return [h, m].filter(Boolean).join(' ');
+    }
+
+    function fillNowTimeP21() {
+      const now = new Date();
+      const h24 = now.getHours();
+      const isPM = h24 >= 12;
+      const h12 = h24 % 12 === 0 ? 12 : h24 % 12;
+      document.getElementById('p21-ampm').value = isPM ? 'ごご' : 'ごぜん';
+      document.getElementById('p21-now-h').value = String(h12);
+      document.getElementById('p21-now-m').value = String(now.getMinutes());
+    }
+
+    function speakPracticeP21(btnEl) {
+      const ampm = (document.getElementById('p21-ampm')?.value || '').trim();
+      const nowTime = readTimePairP21(
+        document.getElementById('p21-now-h')?.value,
+        document.getElementById('p21-now-m')?.value
+      );
+      const startTime = readTimePairP21(
+        document.getElementById('p21-start-h')?.value,
+        document.getElementById('p21-start-m')?.value
+      );
+      const endTime = readTimePairP21(
+        document.getElementById('p21-end-h')?.value,
+        document.getElementById('p21-end-m')?.value
+      );
+
+      const parts = [];
+      if (nowTime) {
+        parts.push(`いま、${ampm ? ampm + ' ' : ''}${nowTime}です。`);
+      }
+      if (startTime) {
+        parts.push(`きょうしつは、${startTime}にはじまります。`);
+      }
+      if (endTime) {
+        parts.push(`${endTime}におわります。`);
+      }
+      if (parts.length === 0) {
+        parts.push('いま、じゅうじさんじゅっぷんです。');
+      }
+      speakText(parts.join(' '), btnEl);
+    }
   </script>
 </body>
 </html>
